@@ -9,7 +9,7 @@ export async function CreateSignUpForm(prevFormState: any, formData: FormData) {
   
   const insert = db.prepare("INSERT INTO signUp(name,email,number) VALUES(?,?,?)");
   console.log("name",name)
-  const result = insert.run(name, email,number);
+  const result = insert.run (name, email,number);
 
   if (result.lastInsertRowid) {
     return {
