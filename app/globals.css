@@ -1,0 +1,104 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+body {
+  background-color: rgb(12, 146, 255);
+}
+
+.sidebar {
+  border: solid 1px rosybrown;
+  width: 200px;
+  height: 500px;
+  margin: 5px;
+  border-radius: 15px;
+  background-color: rgb(8, 105, 231);
+}
+.sidebar-li {
+  border: solid 1px;
+  margin: 10px;
+  text-align: center;
+  border-radius: 10px;
+  background-color: rgb(23, 185, 185);
+}
+.sidebar-li:hover {
+  background-color: rgb(9, 216, 231);
+  cursor: pointer;
+}
+.myproduct {
+  display: flex;
+  flex-direction: column;
+  border: solid 1px red;
+  width: 250px;
+  padding: 15px;
+  margin: 10px;
+}
+.myproduct,
+p {
+  color: blue;
+  font-size: 20px;
+}
+.myproduct,
+p:hover {
+  color: rgb(91, 91, 202);
+}
+
+.dashboardDiv {
+  display: flex;
+  background-color: aqua;
+  border-radius: 15px;
+  justify-content: flex-end;
+}
+.dashboardList {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+}
+.myappDiv {
+  margin-right: 55px;
+}
+.myappDiv,
+p {
+  color: black;
+  display: flex;
+
+  justify-content: start;
+}
+.dashboardDiv,
+p {
+  margin: 5px;
+}
+.appNameDiv {
+  display: flex;
+}
+.appNamePtag {
+  display: block;
+  height: 45px;
+  font-weight: bold;
+}
+
+
+.signUpForm{
+  border: solid 1px red;
+  background-color: aqua;
+  text-align: center;
+  width: 350px;
+  margin: 15px;
+}
+.signUpForm,label{
+  display: block;
+  margin: 15px;
+}
+.loginButton{
+  background-color: rgb(111, 12, 224);
+  width: 155px;
+  border-radius: 15px;
+  color: rgb(230, 11, 22);
+  margin: 5px;
+  height: 35px;
+  font-size: larger;
+}
+.loginButton:hover{
+  cursor: pointer;
+  background-color: rgb(139, 18, 196);
+  color: rgb(15, 7, 7);
+}
