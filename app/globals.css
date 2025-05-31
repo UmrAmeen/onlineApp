@@ -76,19 +76,19 @@ p {
   font-weight: bold;
 }
 
-
-.signUpForm{
+.signUpForm {
   border: solid 1px red;
   background-color: aqua;
   text-align: center;
   width: 350px;
   margin: 15px;
 }
-.signUpForm,label{
+.signUpForm,
+label {
   display: block;
   margin: 15px;
 }
-.loginButton{
+.loginButton {
   background-color: rgb(111, 12, 224);
   width: 155px;
   border-radius: 15px;
@@ -97,8 +97,39 @@ p {
   height: 35px;
   font-size: larger;
 }
-.loginButton:hover{
+.loginButton:hover {
   cursor: pointer;
   background-color: rgb(139, 18, 196);
   color: rgb(15, 7, 7);
+}
+.bodyDiv {
+  display: flex;
+}
+.productsDiv {
+  display: flex;
+  flex-wrap: wrap;
+}
+.myProductList {
+  display: flex;
+  flex-wrap: wrap;
+}
+.NewProducts {
+  background-color: rgb(7, 112, 112);
+  margin: 20px;
+}
+.NewProducts,
+input {
+  border: solid 1px red;
+  font-weight: bold;
+  padding: 5px;
+}
+
+.NewProductsButton {
+  background-color: rgb(20, 235, 152);
+  width: 100px;
+  margin-left: 75px;
+}
+.NewProductsButton:hover {
+  color: brown;
+  
 }

@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function Products() {
   return (
-    <div  className="grid gap-2  grid-cols-[repeat(auto-fill,minmax(250px,1fr))]">
+    <div className="productsDiv">
       <div className="myproduct">
         <img src="https://aromaperfume.lk/wp-content/uploads/13012021-24-1-600x600.png" />
 
