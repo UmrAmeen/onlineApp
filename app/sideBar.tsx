@@ -4,8 +4,8 @@ export default function SideBar() {
   return (
     <>
       <ul className="sidebar-ul">
-        <Link href="/products">
-          <li className="sidebar-li">products</li>
+        <Link href="/categorys">
+          <li className="sidebar-li">categorys</li>
         </Link>
         <Link href="/signUpForm">
           <li className="sidebar-li">signUp</li>

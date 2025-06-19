@@ -1,4 +1,4 @@
-import DashBoard from "./dashBoard";
+import DashBoard from "./navBar";
 import db from "./lib/sqlite/db";
 import SideBar from "./sideBar";
 

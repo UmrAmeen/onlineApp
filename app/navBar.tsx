@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export default function DashBoard() {
+export default function NavBar() {
   return (
     <div className="dashboardDiv">
       <div className="myappDiv">

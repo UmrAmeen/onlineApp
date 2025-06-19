@@ -23,7 +23,7 @@ export default function SignUpForm() {
         </label>
         <label>
           number:
-          <input   name="number" placeholder="number" />
+          <input   name="phoneNumber" placeholder="number" />
         </label>
         <button type="submit" className="loginButton"  disabled={isPending} formAction={formAction}>
           LOGIN

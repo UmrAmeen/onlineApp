@@ -1,6 +1,7 @@
-import DashBoard from "./dashBoard";
+
 import "./globals.css";
 import SideBar from "./sideBar";
+import NavBar from "./navBar";
 export default function RootLayout({
   children,
 }: {
@@ -10,7 +11,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <div>
-          <DashBoard />
+          <NavBar />
         </div>
         <div className="bodyDiv">
           <div className="sidebar">
