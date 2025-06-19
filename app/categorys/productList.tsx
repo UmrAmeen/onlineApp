@@ -1,12 +1,15 @@
-import Link from "next/link";
+import ProductCard from "./productCard";
 
-export default function ProductList({row}:any) {
-  return (
-
-  <div className="myproduct">
-        <img src={row.image} />
-       <p>{row.name}</p>
-      </div>
-  
-  );
+export default function ProductList({rows}:any){
+    return(
+        <>
+         <div className="productsDiv">
+              {rows.map((row) => (
+                <div key={row.id}>
+                  <ProductCard row={row} />
+                </div>
+              ))}
+            </div>
+        </>
+    )
 }
