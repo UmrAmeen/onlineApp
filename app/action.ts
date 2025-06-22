@@ -7,7 +7,7 @@ export async function CreateSignUpForm(prevFormState: any, formData: FormData) {
   const phoneNumber = formData.get("phoneNumber");
 
   const insert = db.prepare(
-    "INSERT INTO signUp(name,email,phoneNumber) VALUES(?,?,?)"
+    "INSERT INTO signUp(name,email,phoneNumber) VALUES(?,?,?)",
   );
   console.log("name", name);
   const result = insert.run(name, email, phoneNumber);

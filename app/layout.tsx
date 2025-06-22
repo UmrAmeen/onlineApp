@@ -1,4 +1,3 @@
-
 import "./globals.css";
 import SideBar from "./sideBar";
 import NavBar from "./navBar";

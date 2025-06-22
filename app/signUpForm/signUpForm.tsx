@@ -8,7 +8,7 @@ export default function SignUpForm() {
     success: false,
     error: "",
   });
- 
+
   return (
     <div>
       {state.success ? <div>Success</div> : <div>{state.error}</div>}
@@ -23,9 +23,14 @@ export default function SignUpForm() {
         </label>
         <label>
           number:
-          <input   name="phoneNumber" placeholder="number" />
+          <input name="phoneNumber" placeholder="number" />
         </label>
-        <button type="submit" className="loginButton"  disabled={isPending} formAction={formAction}>
+        <button
+          type="submit"
+          className="loginButton"
+          disabled={isPending}
+          formAction={formAction}
+        >
           LOGIN
         </button>
       </form>
