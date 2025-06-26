@@ -1,12 +1,13 @@
 import db from "@/app/lib/sqlite/db";
-import { notFound } from "next/navigation";
 import CategoryList from "../categoryList";
+import { notFound } from "next/navigation";
+import Categorys from "../categorys";
+import Link from "next/link";
 
 export default async function CategoryId({ params }: { params: any }) {
-  const p = await params;
-  // console.log("p", p);
+  const categoryId = await params.categoryId;
+  console.log("categoryId", categoryId);
 
-  const categoryId = p.categoryId;
   const categoryRow = db
     .prepare(`SELECT * FROM category WHERE  id = ?`)
     .get(categoryId);
@@ -14,22 +15,28 @@ export default async function CategoryId({ params }: { params: any }) {
     notFound();
   }
 
-  // const rows = db.prepare(`SELECT * FROM category WHERE parent_id == 'categoryRow' `).all();
-  //  console.log("rows", rows);
   const rows = db
-    .prepare(`SELECT * FROM category WHERE parent_id == ? `)
+    .prepare(`SELECT * FROM category WHERE parent_id = ? `)
     .all(categoryId);
-  console.log("rows", rows);
+
   return (
-    <div>
+    <>
       <div>
-        <h1>{categoryRow.name}</h1>
-      </div>
-      <div className="productsDiv">
         <div>
-          <CategoryList rows={rows} />
+          <h1>{categoryRow.name}</h1>
+        </div>
+        <div className="productsDiv">
+          {rows.length > 0 ? (
+            <CategoryList rows={rows} categoryId={categoryId} />
+          ) : (
+            <div>
+              <Link href="/categorys">
+                <button className="categoryIdButton">Back to categorys</button>
+              </Link>
+            </div>
+          )}
         </div>
       </div>
-    </div>
+    </>
   );
 }

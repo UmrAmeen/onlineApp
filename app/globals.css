@@ -132,3 +132,36 @@ input {
 .NewProductsButton:hover {
   color: brown;
 }
+.myFormPage,
+label {
+  display: block;
+  margin: 5px;
+}
+.myFormPage,
+input {
+  border: solid 1px;
+  margin: 5px;
+}
+.myFormPage {
+  border: solid 2px rgb(143, 24, 24);
+  background-color: rgb(112, 45, 45);
+  color: rgb(37, 3, 230);
+  display: flex;
+  flex-direction: column;
+  width: 400px;
+  margin: 20px;
+  padding: 20px;
+  text-align: center;
+}
+.categoryIdButton {
+  background-color: rgb(241, 15, 15);
+  padding: 5px;
+  border-radius: 10px;
+  margin: 15px;
+  font-size: large;
+  font-weight: bold;
+}
+.categoryIdButton:hover{
+  background-color: rgb(240, 66, 66);
+  zoom: 120%;
+}

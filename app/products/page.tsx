@@ -3,7 +3,7 @@ import ProductList from "./productList";
 
 export default function Products() {
   const rows = db.prepare("SELECT * FROM products").all();
-  console.log("productRow", rows);
+  // console.log("productRow", rows);
   return (
     <div className="productsDiv">
       {rows.map((row) => (

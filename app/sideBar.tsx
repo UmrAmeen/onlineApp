@@ -7,15 +7,15 @@ export default function SideBar() {
         <Link href="/categorys">
           <li className="sidebar-li">categorys</li>
         </Link>
-        <Link href="/signUpForm">
-          <li className="sidebar-li">signUp</li>
-        </Link>
         <Link href="/products">
           <li className="sidebar-li"> products</li>
         </Link>
-
-        <li className="sidebar-li">four</li>
-        <li className="sidebar-li">five</li>
+        <Link href="/products/productForm">
+          <li className="sidebar-li">productForm</li>
+        </Link>
+        <Link href="/signUpForm">
+          <li className="sidebar-li">signUp</li>
+        </Link>
       </ul>
     </>
   );
