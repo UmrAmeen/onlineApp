@@ -3,7 +3,7 @@
 import { CreateProductForm } from "@/app/productFormaction";
 import { useActionState } from "react";
 
-export default function ProductForm({ rows }: any) {
+export default function ProductForm() {
   const [state, formAction, isPending] = useActionState(CreateProductForm, {
     success: false,
     error: "",
@@ -27,7 +27,7 @@ export default function ProductForm({ rows }: any) {
         </label>
         <label>
           price:
-          <input placeholder="price" />
+          <input name="price" placeholder="price" />
         </label>
         <label>
           description :

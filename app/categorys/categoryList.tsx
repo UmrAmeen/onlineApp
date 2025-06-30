@@ -1,15 +1,19 @@
 import Link from "next/link";
-import ProductCard from "./productCard";
+import CategoryCard from "./categoryCard";
+
+
 
 export default function CategoryList({ rows, categoryId }: any) {
-  console.log(categoryId);
+   console.log("categoryId",categoryId);
+// console.log("categoryRow",categoryRow)
+  
   return (
     <>
       <div className="productsDiv">
         {rows.map((row) => (
-          <Link key={row.id} href={`/${categoryId}/${row.id}`}>
+          <Link key={row.id} href={categoryId ? `/${categoryId}/${row.id}` : `/categories/${row.id}`}>
             <div>
-              <ProductCard row={row} />
+              <CategoryCard row={row} />
             </div>
           </Link>
         ))}

@@ -1,12 +1,12 @@
 import db from "@/app/lib/sqlite/db";
 import CategoryList from "../categoryList";
 import { notFound } from "next/navigation";
-import Categorys from "../categorys";
 import Link from "next/link";
 
 export default async function CategoryId({ params }: { params: any }) {
-  const categoryId = await params.categoryId;
-  console.log("categoryId", categoryId);
+  const { categoryId } = await params;
+
+  console.log("categoryId1", categoryId);
 
   const categoryRow = db
     .prepare(`SELECT * FROM category WHERE  id = ?`)

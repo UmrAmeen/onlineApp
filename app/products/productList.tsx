@@ -1,8 +1,13 @@
-export default function ProductList({ row }: any) {
+import ProductCard from "./productCard";
+
+export default function ProductList({ rows }: any) {
   return (
-    <div className="myproduct">
-      <img src={row.image} />
-      <p>{row.name}</p>
+    <div className="productsDiv">
+      {rows.map((row) => (
+        <div key={row.id}>
+          <ProductCard row={row} />
+        </div>
+      ))}
     </div>
   );
 }
