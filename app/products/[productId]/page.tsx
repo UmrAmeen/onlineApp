@@ -13,9 +13,6 @@ export default async function ProductPage({ params }: { params: any }) {
   if (!productRow) {
     notFound();
   }
-  if (!productRow || productRow.length === 0) {
-    return <div>No products found.</div>;
-  }
 
   return (
     <div className="productsDiv">
@@ -27,10 +24,9 @@ export default async function ProductPage({ params }: { params: any }) {
           </div>
         ))} */}
       <div className="myproduct">
-         <img src={productRow.image} />
+        <img src={productRow.image} />
         <h1>{productRow.name}</h1>
         <p>Category: {productRow.categoryName}</p>
-       
       </div>
     </div>
   );

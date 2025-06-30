@@ -6,7 +6,7 @@ import Link from "next/link";
 export default async function CategoryId({ params }: { params: any }) {
   const { categoryId } = await params;
 
-  console.log("categoryId1", categoryId);
+  console.log("categoryId", categoryId);
 
   const categoryRow = db
     .prepare(`SELECT * FROM category WHERE  id = ?`)

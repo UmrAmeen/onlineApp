@@ -11,7 +11,7 @@ export default function CategoryList({ rows, categoryId }: any) {
     <>
       <div className="productsDiv">
         {rows.map((row) => (
-          <Link key={row.id} href={categoryId ? `/${categoryId}/${row.id}` : `/categories/${row.id}`}>
+          <Link key={row.id} href={`/categorys/${row.id}`}>
             <div>
               <CategoryCard row={row} />
             </div>
