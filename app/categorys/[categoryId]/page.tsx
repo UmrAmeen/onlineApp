@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 
 export default async function CategoryId({ params }: { params: any }) {
-  const { categoryId } = await params;
+  const  categoryId  = await params.categoryId;
 
   console.log("categoryId", categoryId);
 
@@ -27,7 +27,7 @@ export default async function CategoryId({ params }: { params: any }) {
         </div>
         <div className="productsDiv">
           {rows.length > 0 ? (
-            <CategoryList rows={rows} categoryId={categoryId} />
+            <CategoryList rows={rows} />
           ) : (
             <div>
               <Link href="/categorys">

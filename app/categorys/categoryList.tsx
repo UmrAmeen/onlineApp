@@ -3,9 +3,8 @@ import CategoryCard from "./categoryCard";
 
 
 
-export default function CategoryList({ rows, categoryId }: any) {
-   console.log("categoryId",categoryId);
-// console.log("categoryRow",categoryRow)
+export default function CategoryList({ rows }: any) {
+  
   
   return (
     <>
