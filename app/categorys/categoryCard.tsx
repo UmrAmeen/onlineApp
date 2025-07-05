@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 export default function CategoryCard({ row }: any) {
   return (
     <div className="myproduct">

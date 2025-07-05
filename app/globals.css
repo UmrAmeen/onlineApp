@@ -78,16 +78,15 @@ p {
 
 .signUpForm {
   border: solid 1px red;
-  background-color: aqua;
-  text-align: center;
+  background-color: rgb(223, 231, 231);
+ display: flex;
+ flex-direction: column;
   width: 350px;
   margin: 15px;
+  font-size: large;
+  font-weight: bold;
 }
-.signUpForm,
-label {
-  display: block;
-  margin: 15px;
-}
+
 .loginButton {
   background-color: rgb(111, 12, 224);
   width: 155px;
@@ -143,15 +142,21 @@ input {
   margin: 5px;
 }
 .myFormPage {
-  border: solid 2px rgb(143, 24, 24);
-  background-color: rgb(112, 45, 45);
-  color: rgb(37, 3, 230);
+  border: solid 2px rgb(27, 3, 3);
+  background-color: rgb(246, 247, 248);
+  color: rgb(218, 20, 20);
   display: flex;
   flex-direction: column;
   width: 400px;
   margin: 20px;
   padding: 20px;
-  text-align: center;
+  font-size: larger;
+  font-weight: bold;
+}
+.myFormPage,
+input {
+  display: flex;
+  border: solid 1px black;
 }
 .categoryIdButton {
   background-color: rgb(241, 15, 15);
@@ -161,7 +166,7 @@ input {
   font-size: large;
   font-weight: bold;
 }
-.categoryIdButton:hover{
+.categoryIdButton:hover {
   background-color: rgb(240, 66, 66);
   zoom: 120%;
 }

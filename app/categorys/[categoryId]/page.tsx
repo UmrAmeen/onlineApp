@@ -4,9 +4,9 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 
 export default async function CategoryId({ params }: { params: any }) {
-  const  categoryId  = await params.categoryId;
+  const categoryId = (await params).categoryId;
 
-  console.log("categoryId", categoryId);
+  // console.log("categoryId", categoryId);
 
   const categoryRow = db
     .prepare(`SELECT * FROM category WHERE  id = ?`)

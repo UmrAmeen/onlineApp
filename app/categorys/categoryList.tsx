@@ -1,11 +1,7 @@
 import Link from "next/link";
 import CategoryCard from "./categoryCard";
 
-
-
 export default function CategoryList({ rows }: any) {
-  
-  
   return (
     <>
       <div className="productsDiv">
