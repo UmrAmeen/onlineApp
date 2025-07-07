@@ -1,13 +1,16 @@
 import db from "@/app/lib/sqlite/db";
 import CategoryList from "../categoryList";
 import { notFound } from "next/navigation";
-import Link from "next/link";
+
+import ProductList from "@/app/products/productList";
 
 export default async function CategoryId({ params }: { params: any }) {
   const categoryId = (await params).categoryId;
 
   // console.log("categoryId", categoryId);
-
+  const productRows = db
+    .prepare(`SELECT * FROM products WHERE categoryId = ? `)
+    .all(categoryId);
   const categoryRow = db
     .prepare(`SELECT * FROM category WHERE  id = ?`)
     .get(categoryId);
@@ -30,9 +33,7 @@ export default async function CategoryId({ params }: { params: any }) {
             <CategoryList rows={rows} />
           ) : (
             <div>
-              <Link href="/categorys">
-                <button className="categoryIdButton">Back to categorys</button>
-              </Link>
+              <ProductList rows={productRows} />
             </div>
           )}
         </div>

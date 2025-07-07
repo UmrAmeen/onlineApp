@@ -3,7 +3,7 @@
 import { CreateProductForm } from "@/app/productFormaction";
 import { useActionState } from "react";
 
-export default function ProductForm() {
+export default function ProductForm({rows}:any) {
   const [state, formAction, isPending] = useActionState(CreateProductForm, {
     success: false,
     error: "",
@@ -23,7 +23,11 @@ export default function ProductForm() {
         </label>
         <label>
           category
-          <input name="category" placeholder="category" />
+          <select>
+            {rows.map((row) => (
+              <option key={row.id}>{row.categoryId}{" : "}{row.name}</option>
+            ))}
+          </select>
         </label>
         <label>
           price:

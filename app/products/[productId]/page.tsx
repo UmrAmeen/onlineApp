@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 
 export default async function ProductPage({ params }: { params: any }) {
-  const productId = await params.productId;
+  const productId = (await params).productId;
   // const productRow = db
   //   .prepare(
   //     "SELECT products.*, category.name as categoryName FROM products JOIN category ON products.categoryId = category.id WHERE products.id = ?"
