@@ -7,20 +7,22 @@ import ProductList from "@/app/products/productList";
 export default async function CategoryId({ params }: { params: any }) {
   const categoryId = (await params).categoryId;
 
-  // console.log("categoryId", categoryId);
-  const productRows = db
-    .prepare(`SELECT * FROM products WHERE categoryId = ? `)
-    .all(categoryId);
   const categoryRow = db
     .prepare(`SELECT * FROM category WHERE  id = ?`)
     .get(categoryId);
   if (!categoryRow) {
     notFound();
   }
+// console.log("categoryRow",categoryRow)
+  const productRows = db
+    .prepare(`SELECT * FROM products WHERE categoryId = ? `)
+    .all(categoryId);
+  // console.log("productRow", productRows);
 
   const rows = db
     .prepare(`SELECT * FROM category WHERE parent_id = ? `)
     .all(categoryId);
+  // console.log("rows", rows);
 
   return (
     <>
