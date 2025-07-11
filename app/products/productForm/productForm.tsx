@@ -3,6 +3,9 @@
 import { CreateProductForm } from "@/app/productFormaction";
 import { useActionState } from "react";
 
+  interface RowType {
+    [key: string]: any;
+  }
 export default function ProductForm({rows}:any) {
   const [state, formAction, isPending] = useActionState(CreateProductForm, {
     success: false,
@@ -24,7 +27,7 @@ export default function ProductForm({rows}:any) {
         <label>
           category
           <select>
-            {rows.map((row) => (
+            {rows.map((row:RowType) => (
               <option key={row.id}>{row.name}</option>
             ))}
           </select>
