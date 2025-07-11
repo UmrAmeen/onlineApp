@@ -6,7 +6,7 @@ export default function Form() {
   return (
     <>
       <h1>Create Product</h1>
-      <ProductForm  rows={rows}/>
+      <ProductForm rows={rows} />
     </>
   );
 }
