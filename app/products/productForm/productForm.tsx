@@ -25,17 +25,17 @@ export default function ProductForm({rows}:any) {
           category
           <select>
             {rows.map((row) => (
-              <option key={row.id}>{row.categoryId}{" : "}{row.name}</option>
+              <option key={row.id}>{row.name}</option>
             ))}
           </select>
         </label>
         <label>
           price:
-          <input name="price" placeholder="price" />
+          <input type="number" name="price" placeholder="price" />
         </label>
         <label>
           description :
-          <input name="description" placeholder="add description" />
+          <textarea rows={3} name="description" placeholder="add description" />
         </label>
         <button
           type="submit"

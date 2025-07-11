@@ -97,11 +97,10 @@ p {
   margin: 30px;
   font-size: large;
   font-weight: bold;
-  
 }
 
 .loginButton {
-  background-color: rgb(111, 12, 224);
+  background-color: rgba(40, 10, 124, 0.527);
   width: 155px;
   border-radius: 15px;
   color: rgb(230, 11, 22);
@@ -144,18 +143,8 @@ input {
 .NewProductsButton:hover {
   color: brown;
 }
-.myFormPage,
-label {
-  display: block;
-  margin: 5px;
-}
-.myFormPage,
-input {
-  border: solid 1px;
-  margin: 5px;
-}
 .myFormPage {
-  border: solid 2px rgb(27, 3, 3);
+  border: solid 5px rgb(156, 10, 10);
   background-color: rgb(246, 247, 248);
   color: rgb(218, 20, 20);
   display: flex;
@@ -166,6 +155,27 @@ input {
   font-size: larger;
   font-weight: bold;
 }
+.myFormPage,
+label {
+  display: block;
+  margin: 5px;
+}
+.myFormPage,
+select {
+  display: block;
+  margin: 5px;
+}
+.myFormPage,textarea{
+  border: solid 1px black;
+}
+.submitButton {
+  background-color: #410883;
+  padding: 10px;
+  width: 35%;
+  border-radius: 10px;
+  margin-left: 25%;
+}
+
 .myFormPage,
 input {
   display: flex;
