@@ -1,4 +1,5 @@
 "use server";
+import { stringify } from "querystring";
 import db from "./lib/sqlite/db";
 
 export async function CreateProductForm(
@@ -16,7 +17,7 @@ export async function CreateProductForm(
     "INSERT INTO products(name,image,categoryId,price,slug,description) VALUES(?,?,?,?,?,?)"
   );
    
-  const result = insert.run(name, image, categoryId, price, slug, description);
+  const result = insert.run(name, image.name, categoryId, price, slug, description);
 
   if (result.lastInsertRowid) {
     return {

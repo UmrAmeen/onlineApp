@@ -1,12 +1,18 @@
 "use client";
 
 import { CreateProductForm } from "@/app/productFormaction";
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 
 interface RowType {
   [key: string]: any;
 }
-export default function ProductForm({ rows, productRows }: any) {
+export default function ProductForm({ categoryRows, productRows }: any) {
+  const [file, setFile] = useState(null);
+  function handleChange(e) {
+    console.log(e.target.files);
+    setFile(URL.createObjectURL(e.target.files[0]));
+  }
+
   const [state, formAction, isPending] = useActionState(CreateProductForm, {
     success: false,
     error: "",
@@ -15,28 +21,32 @@ export default function ProductForm({ rows, productRows }: any) {
   return (
     <div>
       {state.success ? <div>Success</div> : <div>{state.error}</div>}
-      <form className="myFormPage">
+      <form className="myFormPage" encType="multipart/form-data">
         <label>
           name:
           <input name="name" placeholder="productName" />
         </label>
         <label>
           slug:
-          <select>
-            {productRows.map((row: RowType) => (
-              <option key={row.id}>{row.slug}</option>
-            ))}
-          </select>
+          <input name="slug" placeholder="slug" />
         </label>
 
         <label className="img-label">
           image:
-          <input type="file" name="image" accept="image/*" />
+          <input
+            type="file"
+            name="image"
+            accept="image/*"
+            onChange={handleChange}
+          />
+          {file && (
+            <img className="preview-image" src={file} alt="Uploaded preview" />
+          )}
         </label>
         <label>
           category
           <select>
-            {rows.map((row: RowType) => (
+            {categoryRows.map((row: RowType) => (
               <option key={row.id}>{row.name}</option>
             ))}
           </select>
