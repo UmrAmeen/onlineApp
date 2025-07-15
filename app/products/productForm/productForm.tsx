@@ -3,14 +3,15 @@
 import { CreateProductForm } from "@/app/productFormaction";
 import { useActionState } from "react";
 
-  interface RowType {
-    [key: string]: any;
-  }
-export default function ProductForm({rows}:any) {
+interface RowType {
+  [key: string]: any;
+}
+export default function ProductForm({ rows, productRows }: any) {
   const [state, formAction, isPending] = useActionState(CreateProductForm, {
     success: false,
     error: "",
   });
+
   return (
     <div>
       {state.success ? <div>Success</div> : <div>{state.error}</div>}
@@ -19,15 +20,23 @@ export default function ProductForm({rows}:any) {
           name:
           <input name="name" placeholder="productName" />
         </label>
-
         <label>
+          slug:
+          <select>
+            {productRows.map((row: RowType) => (
+              <option key={row.id}>{row.slug}</option>
+            ))}
+          </select>
+        </label>
+
+        <label className="img-label">
           image:
-          <input name="image" placeholder="image" />
+          <input type="file" name="image" accept="image/*" />
         </label>
         <label>
           category
           <select>
-            {rows.map((row:RowType) => (
+            {rows.map((row: RowType) => (
               <option key={row.id}>{row.name}</option>
             ))}
           </select>
@@ -46,7 +55,7 @@ export default function ProductForm({rows}:any) {
           disabled={isPending}
           formAction={formAction}
         >
-          submit
+          {isPending ? "Submitting..." : "Submit"}
         </button>
       </form>
     </div>

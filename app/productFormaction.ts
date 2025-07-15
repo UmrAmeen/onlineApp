@@ -6,16 +6,17 @@ export async function CreateProductForm(
   formData: FormData
 ) {
   const name = formData.get("name");
-  const image = formData.get("image");
+  const image = formData.get("image") as File;
   const categoryId = formData.get("category");
   const price = formData.get("price");
+  const slug = formData.get("slug");
   const description = formData.get("description");
 
   const insert = db.prepare(
-    "INSERT INTO products(name,image,categoryId,price,description) VALUES(?,?,?,?,?)"
+    "INSERT INTO products(name,image,categoryId,price,slug,description) VALUES(?,?,?,?,?,?)"
   );
-  //   console.log("name", name);
-  const result = insert.run(name, image, categoryId, price, description);
+   
+  const result = insert.run(name, image, categoryId, price, slug, description);
 
   if (result.lastInsertRowid) {
     return {

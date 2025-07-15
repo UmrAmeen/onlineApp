@@ -144,8 +144,8 @@ input {
   color: brown;
 }
 .myFormPage {
-  border: solid 5px rgb(156, 10, 10);
-  background-color: rgb(246, 247, 248);
+  border: solid 15px rgb(209, 49, 49);
+  background-color: rgb(195, 218, 241);
   color: rgb(218, 20, 20);
   display: flex;
   flex-direction: column;
@@ -164,8 +164,11 @@ label {
 select {
   display: block;
   margin: 5px;
+  border: solid 1px black;
+  width: 85%;
 }
-.myFormPage,textarea{
+.myFormPage,
+textarea {
   border: solid 1px black;
 }
 .submitButton {
@@ -180,6 +183,13 @@ select {
 input {
   display: flex;
   border: solid 1px black;
+  width: 85%;
+}
+.myFormPage,
+textarea {
+  display: flex;
+  border: solid 1px black;
+  width: 85%;
 }
 .AddToProducts {
   margin-top: 150px;
