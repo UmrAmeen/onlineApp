@@ -5,10 +5,13 @@ import ProductList from "@/app/products/productList";
 
 export default async function CategoryId({ params }: { params: any }) {
   const categoryId = (await params).categoryId;
+  console.log("categoryId", categoryId);
 
   const categoryRow = db
-    .prepare(`SELECT * FROM category WHERE  id = ?`)
+    .prepare(`SELECT * FROM category WHERE slug = ?`)
     .get(categoryId);
+  console.log("categoryRow", categoryRow);
+
   if (!categoryRow) {
     notFound();
   }
@@ -16,10 +19,12 @@ export default async function CategoryId({ params }: { params: any }) {
   const productRows = db
     .prepare(`SELECT * FROM products WHERE categoryId = ? `)
     .all(categoryId);
+  console.log("productRow", productRows);
 
   const rows = db
     .prepare(`SELECT * FROM category WHERE parent_id = ? `)
     .all(categoryId);
+  console.log("rows", rows);
 
   return (
     <>

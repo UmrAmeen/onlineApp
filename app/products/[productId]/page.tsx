@@ -9,7 +9,7 @@ export default async function ProductPage({ params }: { params: any }) {
 
   const rows = db
     .prepare(`SELECT * FROM products WHERE id = ? `)
-    .all(productId);
+    .all(productId)
 
   return (
     <div className="productsDiv">

@@ -2,17 +2,30 @@
 
 import { CreateProductForm } from "@/app/productFormaction";
 import { useActionState, useState } from "react";
+import slugify from "slugify";
 
 interface RowType {
   [key: string]: any;
 }
+
 export default function ProductForm({ categoryRows, productRows }: any) {
-  const [file, setFile] = useState(null);
+const [file, setFile] = useState<string | null>(null);
+  const [name, setName] = useState("");
+  const [slug, setSlug] = useState("");
+
+  const handleNameChange = (e) => {
+    setName(e.target.value);
+    setSlug(slugify(e.target.value.trim(), "_"));
+  };
   function handleChange(e) {
     console.log(e.target.files);
     setFile(URL.createObjectURL(e.target.files[0]));
   }
-
+  function handleSubmit() {
+    setFile(null);
+    setName("");
+    setSlug("");
+  }
   const [state, formAction, isPending] = useActionState(CreateProductForm, {
     success: false,
     error: "",
@@ -21,14 +34,24 @@ export default function ProductForm({ categoryRows, productRows }: any) {
   return (
     <div>
       {state.success ? <div>Success</div> : <div>{state.error}</div>}
-      <form className="myFormPage" encType="multipart/form-data">
+      <form
+        className="myFormPage"
+        encType="multipart/form-data"
+        action={formAction}
+        onSubmit={handleSubmit}
+      >
         <label>
           name:
-          <input name="name" placeholder="productName" />
+          <input
+            name="name"
+            placeholder="productName"
+            value={name}
+            onChange={handleNameChange}
+          />
         </label>
         <label>
           slug:
-          <input name="slug" placeholder="slug" />
+          <input name="slug" placeholder="slug" value={slug} readOnly />
         </label>
 
         <label className="img-label">
@@ -45,9 +68,11 @@ export default function ProductForm({ categoryRows, productRows }: any) {
         </label>
         <label>
           category
-          <select>
+          <select name="category">
             {categoryRows.map((row: RowType) => (
-              <option key={row.id}>{row.name}</option>
+              <option key={row.id} value={row.name}>
+                {row.name}
+              </option>
             ))}
           </select>
         </label>
@@ -59,12 +84,7 @@ export default function ProductForm({ categoryRows, productRows }: any) {
           description :
           <textarea rows={3} name="description" placeholder="add description" />
         </label>
-        <button
-          type="submit"
-          className="submitButton"
-          disabled={isPending}
-          formAction={formAction}
-        >
+        <button type="submit" className="submitButton" disabled={isPending}>
           {isPending ? "Submitting..." : "Submit"}
         </button>
       </form>
