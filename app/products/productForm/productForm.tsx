@@ -1,5 +1,4 @@
 "use client";
-
 import { CreateProductForm } from "@/app/productFormaction";
 import { useActionState, useState } from "react";
 import slugify from "slugify";
@@ -36,7 +35,7 @@ export default function ProductForm({ categoryRows, productRows }: any) {
       {state.success ? <div>Success</div> : <div>{state.error}</div>}
       <form
         className="myFormPage"
-        encType="multipart/form-data"
+        // encType="multipart/form-data"
         action={formAction}
       >
         <label>
@@ -58,7 +57,11 @@ export default function ProductForm({ categoryRows, productRows }: any) {
               onChange={handleSlugChange}
               readOnly={!editSlug}
             />
-            <button className="slug-button" type="button" onClick={() => setEditSlug(!editSlug)}>
+            <button
+              className="slug-button"
+              type="button"
+              onClick={() => setEditSlug(!editSlug)}
+            >
               {editSlug ? "Save" : "Edit"}
             </button>
           </div>
