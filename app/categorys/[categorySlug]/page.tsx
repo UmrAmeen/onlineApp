@@ -4,27 +4,27 @@ import { notFound } from "next/navigation";
 import ProductList from "@/app/products/productList";
 
 export default async function CategoryId({ params }: { params: any }) {
-  const categoryId = (await params).categoryId;
-  console.log("categoryId", categoryId);
+  const categorySlug = await params.categorySlug;
+  // console.log("categoryId", categorySlug);
 
   const categoryRow = db
     .prepare(`SELECT * FROM category WHERE slug = ?`)
-    .get(categoryId);
-  console.log("categoryRow", categoryRow);
+    .get(categorySlug);
+  // console.log("categoryRow", categoryRow);
 
   if (!categoryRow) {
     notFound();
   }
 
-  const productRows = db
-    .prepare(`SELECT * FROM products WHERE categoryId = ? `)
-    .all(categoryId);
-  console.log("productRow", productRows);
+  const subcategories = db
+    .prepare(`SELECT * FROM category WHERE parent_id = ?`)
+    .all(categoryRow.id);
 
-  const rows = db
-    .prepare(`SELECT * FROM category WHERE parent_id = ? `)
-    .all(categoryId);
-  console.log("rows", rows);
+  const productRows = db
+    .prepare(`SELECT * FROM products WHERE categoryId = ?`)
+    .all(categoryRow.id);
+
+  //  console.log("rows", rows);
 
   return (
     <>
@@ -35,13 +35,14 @@ export default async function CategoryId({ params }: { params: any }) {
           </h1>
         </div>
         <div className="productsDiv">
-          {rows.length > 0 ? (
-            <CategoryList rows={rows} />
+          {subcategories.length > 0 ? (
+            <CategoryList rows={subcategories} />
           ) : (
             <div>
               <ProductList rows={productRows} />
             </div>
           )}
+          
         </div>
       </div>
     </>

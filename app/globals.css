@@ -158,7 +158,27 @@ input {
 .myFormPage,
 label {
   display: block;
-  margin: 5px;
+}
+.slug-label {
+  display: flex;
+  flex-direction: column;
+}
+
+.slug-text {
+  margin-bottom: 5px;
+}
+
+.input-button-container {
+  display: flex;
+  align-items: center;
+}
+.slug-button {
+  background-color: #007bff;
+  color: antiquewhite;
+  padding: 2px;
+  width: 55px;
+  margin-left: 5px;
+  border-radius: 5px;
 }
 .myFormPage,
 select {
@@ -260,7 +280,7 @@ textarea {
 .add-to-cart-btn:hover {
   background-color: #0056b3;
 }
-.preview-image{
+.preview-image {
   width: 155px;
   height: 120px;
   margin: 10px;

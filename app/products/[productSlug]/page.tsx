@@ -5,12 +5,12 @@ import Link from "next/link";
 import ProductIdList from "../prodctIdList";
 
 export default async function ProductPage({ params }: { params: any }) {
-  const productId = (await params).productId;
+  const productSlug = (await params).productSlug;
 
   const rows = db
-    .prepare(`SELECT * FROM products WHERE id = ? `)
-    .all(productId)
-
+    .prepare(`SELECT * FROM products WHERE slug = ? `)
+    .all(productSlug)
+ 
   return (
     <div className="productsDiv">
       {rows.length > 0 ? (

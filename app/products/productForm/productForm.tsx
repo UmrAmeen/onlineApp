@@ -9,9 +9,10 @@ interface RowType {
 }
 
 export default function ProductForm({ categoryRows, productRows }: any) {
-const [file, setFile] = useState<string | null>(null);
+  const [file, setFile] = useState<string | null>(null);
   const [name, setName] = useState("");
   const [slug, setSlug] = useState("");
+  const [editSlug, setEditSlug] = useState(false);
 
   const handleNameChange = (e) => {
     setName(e.target.value);
@@ -21,11 +22,10 @@ const [file, setFile] = useState<string | null>(null);
     console.log(e.target.files);
     setFile(URL.createObjectURL(e.target.files[0]));
   }
-  function handleSubmit() {
-    setFile(null);
-    setName("");
-    setSlug("");
-  }
+  const handleSlugChange = (e) => {
+    setSlug(e.target.value);
+  };
+
   const [state, formAction, isPending] = useActionState(CreateProductForm, {
     success: false,
     error: "",
@@ -38,7 +38,6 @@ const [file, setFile] = useState<string | null>(null);
         className="myFormPage"
         encType="multipart/form-data"
         action={formAction}
-        onSubmit={handleSubmit}
       >
         <label>
           name:
@@ -49,9 +48,20 @@ const [file, setFile] = useState<string | null>(null);
             onChange={handleNameChange}
           />
         </label>
-        <label>
-          slug:
-          <input name="slug" placeholder="slug" value={slug} readOnly />
+        <label className="slug-label">
+          <span className="slug-text">slug:</span>
+          <div className="input-button-container">
+            <input
+              name="slug"
+              placeholder="slug"
+              value={slug}
+              onChange={handleSlugChange}
+              readOnly={!editSlug}
+            />
+            <button className="slug-button" type="button" onClick={() => setEditSlug(!editSlug)}>
+              {editSlug ? "Save" : "Edit"}
+            </button>
+          </div>
         </label>
 
         <label className="img-label">
