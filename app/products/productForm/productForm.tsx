@@ -7,21 +7,21 @@ interface RowType {
   [key: string]: any;
 }
 
-export default function ProductForm({ categoryRows, productRows }: any) {
+export default function ProductForm({ categoryRows }: any) {
   const [file, setFile] = useState<string | null>(null);
   const [name, setName] = useState("");
   const [slug, setSlug] = useState("");
   const [editSlug, setEditSlug] = useState(false);
 
-  const handleNameChange = (e) => {
+  const handleNameChange = (e: any) => {
     setName(e.target.value);
     setSlug(slugify(e.target.value.trim(), "_"));
   };
-  function handleChange(e) {
+  function handleChange(e: any) {
     console.log(e.target.files);
     setFile(URL.createObjectURL(e.target.files[0]));
   }
-  const handleSlugChange = (e) => {
+  const handleSlugChange = (e: any) => {
     setSlug(e.target.value);
   };
 
@@ -35,7 +35,6 @@ export default function ProductForm({ categoryRows, productRows }: any) {
       {state.success ? <div>Success</div> : <div>{state.error}</div>}
       <form
         className="myFormPage"
-        // encType="multipart/form-data"
         action={formAction}
       >
         <label>

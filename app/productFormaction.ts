@@ -13,11 +13,15 @@ export async function CreateProductForm(
   const slug = formData.get("slug");
   const description = formData.get("description");
 
+  const imageBytes = await image.arrayBuffer();
+
+  const buffer = Buffer.from(imageBytes);
+
   const insert = db.prepare(
     "INSERT INTO products(name,image,categoryId,price,slug,description) VALUES(?,?,?,?,?,?)"
   );
-   
-  const result = insert.run(name, image.name, categoryId, price, slug, description);
+
+  const result = insert.run(name, buffer, categoryId, price, slug, description);
 
   if (result.lastInsertRowid) {
     return {

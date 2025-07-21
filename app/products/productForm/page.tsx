@@ -3,12 +3,12 @@ import ProductForm from "./productForm";
 
 export default function Form() {
   const categoryRows = db.prepare("SELECT * FROM category").all();
-  const productRows = db.prepare("SELECT * FROM products").all();
+  // const productRows = db.prepare("SELECT * FROM products").all();
 
   return (
     <>
       <h1>Create Product</h1>
-      <ProductForm categoryRows={categoryRows} productRows={productRows} />
+      <ProductForm categoryRows={categoryRows} />
     </>
   );
 }

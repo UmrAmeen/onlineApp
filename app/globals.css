@@ -145,8 +145,8 @@ input {
 }
 .myFormPage {
   border: solid 15px rgb(209, 49, 49);
-  background-color: rgb(195, 218, 241);
-  color: rgb(218, 20, 20);
+  background-color: rgb(98, 130, 163);
+  color: rgb(10, 1, 1);
   display: flex;
   flex-direction: column;
   width: 400px;

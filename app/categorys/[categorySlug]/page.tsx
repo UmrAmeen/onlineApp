@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import ProductList from "@/app/products/productList";
 
 export default async function CategoryId({ params }: { params: any }) {
-  const categorySlug = await params.categorySlug;
+  const categorySlug = (await params).categorySlug;
   // console.log("categoryId", categorySlug);
 
   const categoryRow = db
@@ -18,11 +18,11 @@ export default async function CategoryId({ params }: { params: any }) {
 
   const subcategories = db
     .prepare(`SELECT * FROM category WHERE parent_id = ?`)
-    .all(categoryRow.id);
+    .all(categoryRow.id.toString());
 
   const productRows = db
     .prepare(`SELECT * FROM products WHERE categoryId = ?`)
-    .all(categoryRow.id);
+    .all(categoryRow.id.toString());
 
   //  console.log("rows", rows);
 
