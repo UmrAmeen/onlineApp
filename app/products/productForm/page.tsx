@@ -1,14 +1,25 @@
 import db from "@/app/lib/sqlite/db";
 import ProductForm from "./productForm";
 
+interface RowType {
+  [key: string]: any;
+}
 export default function Form() {
   const categoryRows = db.prepare("SELECT * FROM category").all();
-  // const productRows = db.prepare("SELECT * FROM products").all();
 
+  const categoryRowsWithBase64Images = categoryRows.map((row: RowType) => {
+    const base64Image = row.image.toString("base64");
+    const { image, ...rest } = row;
+
+    return {
+      ...rest,
+      base64Image: `data:image/jpeg;base64,${base64Image}`,
+    };
+  });
   return (
     <>
       <h1>Create Product</h1>
-      <ProductForm categoryRows={categoryRows} />
+      <ProductForm categoryRows={categoryRowsWithBase64Images} />
     </>
   );
 }

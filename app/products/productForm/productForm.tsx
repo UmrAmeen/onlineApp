@@ -1,6 +1,6 @@
 "use client";
 import { CreateProductForm } from "@/app/productFormaction";
-import { useActionState, useState } from "react";
+import { useActionState, useEffect, useState } from "react";
 import slugify from "slugify";
 
 interface RowType {
@@ -12,7 +12,7 @@ export default function ProductForm({ categoryRows }: any) {
   const [name, setName] = useState("");
   const [slug, setSlug] = useState("");
   const [editSlug, setEditSlug] = useState(false);
-
+ 
   const handleNameChange = (e: any) => {
     setName(e.target.value);
     setSlug(slugify(e.target.value.trim(), "_"));
@@ -33,10 +33,7 @@ export default function ProductForm({ categoryRows }: any) {
   return (
     <div>
       {state.success ? <div>Success</div> : <div>{state.error}</div>}
-      <form
-        className="myFormPage"
-        action={formAction}
-      >
+      <form className="myFormPage" action={formAction}>
         <label>
           name:
           <input

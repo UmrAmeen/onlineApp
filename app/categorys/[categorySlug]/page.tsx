@@ -3,6 +3,9 @@ import CategoryList from "../categoryList";
 import { notFound } from "next/navigation";
 import ProductList from "@/app/products/productList";
 
+interface RowType {
+  [key: string]: any;
+}
 export default async function CategoryId({ params }: { params: any }) {
   const categorySlug = (await params).categorySlug;
   // console.log("categoryId", categorySlug);
@@ -24,7 +27,22 @@ export default async function CategoryId({ params }: { params: any }) {
     .prepare(`SELECT * FROM products WHERE categoryId = ?`)
     .all(categoryRow.id.toString());
 
-  //  console.log("rows", rows);
+  const subcategoriRowsWithBase64Images = subcategories.map((row: RowType) => {
+    const base64Image = row.image.toString("base64");
+
+    return {
+      ...row,
+      base64Image: `data:image/jpeg;base64,${base64Image}`,
+    };
+  });
+  const productRowWithBase64Image = productRows.map((row: RowType) => {
+    const base64Image = row.image.toString("base64");
+
+    return {
+      ...row,
+      base64Image: `data:image/jpeg;base64,${base64Image}`,
+    };
+  });
 
   return (
     <>
@@ -36,13 +54,12 @@ export default async function CategoryId({ params }: { params: any }) {
         </div>
         <div className="productsDiv">
           {subcategories.length > 0 ? (
-            <CategoryList rows={subcategories} />
+            <CategoryList rows={subcategoriRowsWithBase64Images} />
           ) : (
             <div>
-              <ProductList rows={productRows} />
+              <ProductList rows={productRowWithBase64Image} />
             </div>
           )}
-          
         </div>
       </div>
     </>

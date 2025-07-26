@@ -4,7 +4,7 @@ interface RowType {
   [key: string]: any;
 }
 export default function ProductList({ rows }: any) {
-  // console.log("rows", rows);
+  
   return (
     <div className="productsDiv">
       {rows.map((row: RowType) => (
