@@ -9,22 +9,23 @@ body {
 .sidebar {
   border: solid 1px rosybrown;
   width: 200px;
-  height: 500px;
+  height: 600px;
   margin: 5px;
   border-radius: 15px;
   background-color: rgb(4, 50, 110);
 }
 .sidebar-li {
   border: solid 1px;
-  margin: 10px;
+  margin: 20px 10px 10px 10px;
   text-align: center;
   border-radius: 10px;
-  background-color: rgb(23, 185, 185);
-  color: #0c0c0c;
+  background-color: rgb(16, 206, 206);
+  color: #3f0606;
   font-weight: bold;
+  font-size: 20px;
 }
 .sidebar-li:hover {
-  background-color: rgb(9, 216, 231);
+  background-color: rgb(11, 80, 85);
   cursor: pointer;
 }
 .myproduct {
@@ -50,7 +51,7 @@ p {
 }
 .myproduct,
 p:hover {
-  color: rgb(91, 91, 202);
+  color: rgb(238, 29, 186);
 }
 
 .dashboardDiv {
@@ -71,7 +72,6 @@ p:hover {
 p {
   color: black;
   display: flex;
-
   justify-content: start;
 }
 .dashboardDiv,
@@ -230,7 +230,7 @@ textarea {
 }
 .product-card {
   display: flex;
-  border: 1px solid #ddd;
+  border: 1px solid #880a0a;
   border-radius: 10px;
   padding: 20px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -266,8 +266,14 @@ textarea {
 .product-price {
   font-size: 18px;
   font-weight: bold;
+  color: #e916de;
 }
-
+.product-name{
+  font-size: larger;
+  font-weight: bold;
+  color: #8d44ee;
+  font-size: 25px;
+}
 .add-to-cart-btn {
   padding: 10px 20px;
   border: none;

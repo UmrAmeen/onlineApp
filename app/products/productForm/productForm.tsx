@@ -1,13 +1,13 @@
 "use client";
 import { CreateProductForm } from "@/app/productFormaction";
-import { useActionState, useEffect, useState } from "react";
+import { useActionState, useState } from "react";
 import slugify from "slugify";
 
 interface RowType {
   [key: string]: any;
 }
 
-export default function ProductForm({ categoryRows }: any) {
+export default function NewProductForm({ categoryRows }: any) {
   const [file, setFile] = useState<string | null>(null);
   const [name, setName] = useState("");
   const [slug, setSlug] = useState("");

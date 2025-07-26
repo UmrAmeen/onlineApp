@@ -6,7 +6,7 @@ interface RowType {
 }
 export default function Categorys() {
   const rows = db
-    .prepare(`SELECT * FROM category WHERE parent_id = 'null'`)
+    .prepare(`SELECT * FROM category WHERE parent_id is NULL`)
     .all();
   const rowsWithBase64Images = rows.map((row: RowType) => {
     const base64Image = row.image.toString("base64");

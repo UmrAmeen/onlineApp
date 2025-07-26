@@ -1,5 +1,5 @@
 import db from "@/app/lib/sqlite/db";
-import ProductForm from "./productForm";
+import NewProductForm from "./productForm";
 
 interface RowType {
   [key: string]: any;
@@ -19,7 +19,7 @@ export default function Form() {
   return (
     <>
       <h1>Create Product</h1>
-      <ProductForm categoryRows={categoryRowsWithBase64Images} />
+      <NewProductForm categoryRows={categoryRowsWithBase64Images} />
     </>
   );
 }
