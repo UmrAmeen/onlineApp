@@ -8,7 +8,7 @@ export default function ProductList({ rows }: any) {
   return (
     <div className="productsDiv">
       {rows.map((row: RowType) => (
-        <Link key={row.id} href={`/products/${row.slug}`}>
+        <Link key={row.id} href={`/product/${row.slug}`}>
           <div>
             <ProductCard row={row} />
           </div>

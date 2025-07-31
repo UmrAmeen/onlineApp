@@ -1,7 +1,7 @@
 import db from "@/app/lib/sqlite/db";
 import CategoryList from "../categoryList";
 import { notFound } from "next/navigation";
-import ProductList from "@/app/products/productList";
+import ProductList from "@/app/product/productList";
 
 interface RowType {
   [key: string]: any;

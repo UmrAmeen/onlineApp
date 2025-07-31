@@ -17,7 +17,7 @@ export default function ProductIdCard({ row }: any) {
           </Link>
           <Link
             href={{
-              pathname: "/products/newProductForm",
+              pathname: "/product/editProductForm",
             }}
           >
             <button className="add-to-cart-btn">Edit</button>

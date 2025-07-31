@@ -1,9 +1,24 @@
-import Categorys from "./categorys";
+import db from "../lib/sqlite/db";
+import CategoryList from "./categoryList";
 
-export default function AllProducts() {
+interface RowType {
+  [key: string]: any;
+}
+export default function Categorys() {
+  const rows = db
+    .prepare(`SELECT * FROM category WHERE parent_id is NULL`)
+    .all();
+  const rowsWithBase64Images = rows.map((row: RowType) => {
+    const base64Image = row.image.toString("base64");
+
+    return {
+      ...row,
+      base64Image: `data:image/jpeg;base64,${base64Image}`,
+    };
+  });
   return (
     <>
-      <Categorys />
+      <CategoryList rows={rowsWithBase64Images} />
     </>
   );
 }

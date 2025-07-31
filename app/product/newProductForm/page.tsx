@@ -19,7 +19,7 @@ export default function Form() {
   return (
     <>
       <h1>Create Product</h1>
-      <NewProductForm categoryRows={categoryRowsWithBase64Images} />
+     <NewProductForm categoryRows={categoryRowsWithBase64Images}/>
     </>
   );
 }
