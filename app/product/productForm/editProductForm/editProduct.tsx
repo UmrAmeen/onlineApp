@@ -62,7 +62,7 @@ export default function EditProduct({ categoryRows, product }: any) {
           image:
           <input type="file" name="image" accept="image/*" />
            {product.base64Image && (
-            <img src={product.base64Image} alt="Image" style={{ width: 100 }} />
+            <img src={product.base64Image} alt="Image" style={{ width: 120 }} />
           )}
         </label>
         <label>

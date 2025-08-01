@@ -12,7 +12,7 @@ export default function Products() {
 
     return {
       ...row,
-      base64Image: `data:image/jpeg;base64,${base64Image}`, // You can adjust MIME type if necessary (image/jpeg, image/png, etc.)
+      base64Image: `data:image/jpeg;base64,${base64Image}`, 
     };
   });
 
