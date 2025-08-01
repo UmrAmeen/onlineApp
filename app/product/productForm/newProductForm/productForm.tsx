@@ -7,18 +7,24 @@ interface RowType {
   [key: string]: any;
 }
 
-export default function EditProductForm({ categoryRows, product }: any) {
-  const [name, setName] = useState(product.name);
-  const [slug, setSlug] = useState(product.slug);
+export default function NewProduct({ categoryRows }: any) {
+  const [file, setFile] = useState<string | null>(null);
+  const [name, setName] = useState("");
+  const [slug, setSlug] = useState("");
   const [editSlug, setEditSlug] = useState(false);
 
   const handleNameChange = (e: any) => {
     setName(e.target.value);
     setSlug(slugify(e.target.value.trim(), "_"));
   };
+  function handleChange(e: any) {
+    console.log(e.target.files);
+    setFile(URL.createObjectURL(e.target.files[0]));
+  }
   const handleSlugChange = (e: any) => {
     setSlug(e.target.value);
   };
+
   const [state, formAction, isPending] = useActionState(CreateProductForm, {
     success: false,
     error: "",
@@ -28,7 +34,6 @@ export default function EditProductForm({ categoryRows, product }: any) {
     <div>
       {state.success ? <div>Success</div> : <div>{state.error}</div>}
       <form className="myFormPage" action={formAction}>
-        <input type="hidden" name="id" value={product.id} />
         <label>
           name:
           <input
@@ -60,15 +65,20 @@ export default function EditProductForm({ categoryRows, product }: any) {
 
         <label className="img-label">
           image:
-          <input type="file" name="image" accept="image/*" />
-           {product.base64Image && (
-            <img src={product.base64Image} alt="Image" style={{ width: 100 }} />
+          <input
+            type="file"
+            name="image"
+            accept="image/*"
+            onChange={handleChange}
+          />
+          {file && (
+            <img className="preview-image" src={file} alt="Uploaded preview" />
           )}
         </label>
         <label>
           category
-          <select name="category" defaultValue={product.category}>
-            {categoryRows.map((row: RowType) => (
+          <select name="category">
+            {categoryRows?.map((row: RowType) => (
               <option key={row.id} value={row.name}>
                 {row.name}
               </option>
@@ -77,21 +87,11 @@ export default function EditProductForm({ categoryRows, product }: any) {
         </label>
         <label>
           price:
-          <input
-            type="number"
-            name="price"
-            placeholder="price"
-            defaultValue={product.price}
-          />
+          <input type="number" name="price" placeholder="price" />
         </label>
         <label>
           description :
-          <textarea
-            rows={3}
-            name="description"
-            placeholder="add description"
-            defaultValue={product.description}
-          />
+          <textarea rows={3} name="description" placeholder="add description" />
         </label>
         <button type="submit" className="submitButton" disabled={isPending}>
           {isPending ? "Submitting..." : "Submit"}

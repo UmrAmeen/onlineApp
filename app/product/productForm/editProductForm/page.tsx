@@ -1,9 +1,12 @@
 import db from "@/app/lib/sqlite/db";
-import EditProductForm from "./editProductForm";
+import EditProduct from "./editProduct";
 
-export default function Form() {
+interface RowType {
+  [key: string]: any;
+}
+export default function ProductForm() {
   const categoryRows = db.prepare("SELECT * FROM category").all();
-  const categoryRowsWithBase64Images = categoryRows.map((row) => {
+  const categoryRowsWithBase64Images = categoryRows.map((row: RowType) => {
     const base64Image = row.image.toString("base64");
     const { image, ...rest } = row;
 
@@ -13,7 +16,8 @@ export default function Form() {
     };
   });
 
-  const product = db.prepare("SELECT * FROM products WHERE id = 2").get();
+  const product = db.prepare("SELECT * FROM products WHERE id = ?").get(1);
+
   const productWithImage = {
     ...product,
     image: undefined,
@@ -21,9 +25,11 @@ export default function Form() {
   };
 
   return (
-    <div>
-      <EditProductForm categoryRows={categoryRowsWithBase64Images} product={productWithImage} />
-      ;
-    </div>
+    <>
+      <EditProduct
+        categoryRows={categoryRowsWithBase64Images}
+        product={productWithImage}
+      />
+    </>
   );
 }

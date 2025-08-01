@@ -28,7 +28,7 @@ export default async function ProductPage({ params }: { params: any }) {
         <ProductIdList rows={rowsWithBase64Images} />
       ) : (
         <div className="AddToProducts">
-          <Link href="/product/newProductForm">
+          <Link href="/product/productForm/newProductForm">
             <button className="AddToProductsButton">add to products</button>
           </Link>
         </div>

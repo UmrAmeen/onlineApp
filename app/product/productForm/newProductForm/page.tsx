@@ -1,10 +1,11 @@
 import db from "@/app/lib/sqlite/db";
-import NewProductForm from "./productForm";
+import NewProduct from "./productForm";
 
 interface RowType {
   [key: string]: any;
 }
-export default function Form() {
+
+export default function NewProductForm() {
   const categoryRows = db.prepare("SELECT * FROM category").all();
 
   const categoryRowsWithBase64Images = categoryRows.map((row: RowType) => {
@@ -19,7 +20,7 @@ export default function Form() {
   return (
     <>
       <h1>Create Product</h1>
-     <NewProductForm categoryRows={categoryRowsWithBase64Images}/>
+      <NewProduct categoryRows={categoryRowsWithBase64Images} />
     </>
   );
 }
