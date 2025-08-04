@@ -3,14 +3,12 @@ import ProductIdCard from "./productIdCard";
 interface RowType {
   [key: string]: any;
 }
-export default function ProductIdList({ rows }: any) {
+export default function ProductIdList({ row }: any) {
   return (
     <>
-      {rows.map((row: RowType) => (
-        <div key={row.id}>
-          <ProductIdCard row={row} />
-        </div>
-      ))}
+      <div key={row.id}>
+        <ProductIdCard row={row} />
+      </div>
     </>
   );
 }

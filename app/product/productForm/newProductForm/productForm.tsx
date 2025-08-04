@@ -79,7 +79,7 @@ export default function NewProduct({ categoryRows }: any) {
           category
           <select name="category">
             {categoryRows?.map((row: RowType) => (
-              <option key={row.id} value={row.name}>
+              <option key={row.id} value={row.id}>
                 {row.name}
               </option>
             ))}

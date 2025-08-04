@@ -1,5 +1,5 @@
 "use client";
-import { CreateProductForm, UpdateProductForm } from "@/app/productFormaction";
+import {  UpdateProductForm } from "@/app/productFormaction";
 import { useActionState, useState } from "react";
 import slugify from "slugify";
 

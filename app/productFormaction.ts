@@ -53,6 +53,7 @@ export async function UpdateProductForm(
     buffer = Buffer.from(imageBytes);
   }
 
+
   const updateProduct = db.prepare(
     `UPDATE products 
      SET name = ?,  image = COALESCE(?, image) , categoryId = ?, price = ?, slug = ?, description = ?
@@ -75,6 +76,6 @@ export async function UpdateProductForm(
   }
   return {
     success: false,
-    error: "Product not found or no changes made",
+    error: "Product not found ",
   };
 }

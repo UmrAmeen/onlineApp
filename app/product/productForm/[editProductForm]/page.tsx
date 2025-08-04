@@ -33,9 +33,9 @@ export default async function ProductForm({ params }: { params: any }) {
     ...restProduct,
     base64Image,
   };
-
   return (
     <>
+    <h1> edit {product.name}</h1>
       <EditProduct
         categoryRows={categoryRowsWithBase64Images}
         product={productWithImage}

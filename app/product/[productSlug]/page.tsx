@@ -1,38 +1,24 @@
 import db from "@/app/lib/sqlite/db";
-import Link from "next/link";
 import ProductIdList from "../prodctIdList";
 
-interface RowType {
-  [key: string]: any;
-}
 export default async function ProductPage({ params }: { params: any }) {
   const productSlug = (await params).productSlug;
-  // console.log("productSlug", productSlug);
-  const rows = db
+
+  const row = db
     .prepare(`SELECT * FROM products WHERE slug = ? `)
-    .all(productSlug);
+    .get(productSlug);
 
-  const rowsWithBase64Images = rows.map((row: RowType) => {
-    const base64Image = row.image.toString("base64");
-    const { image, ...rest } = row;
+  const base64Image = `data:image/jpeg;base64,${Buffer.from(row.image).toString("base64")}`;
+  const { image, ...restProduct } = row;
 
-    return {
-      ...rest,
-      base64Image: `data:image/jpeg;base64,${base64Image}`,
-    };
-  });
+  const productWithImage = {
+    ...restProduct,
+    base64Image,
+  };
 
   return (
     <div className="productsDiv">
-      {rowsWithBase64Images.length > 0 ? (
-        <ProductIdList rows={rowsWithBase64Images} />
-      ) : (
-        <div className="AddToProducts">
-          <Link href="/product/productForm/newProductForm">
-            <button className="AddToProductsButton">add to products</button>
-          </Link>
-        </div>
-      )}
+      <ProductIdList row={productWithImage} />
     </div>
   );
 }
