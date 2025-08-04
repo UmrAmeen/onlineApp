@@ -8,7 +8,7 @@ interface RowType {
 }
 export default async function CategoryId({ params }: { params: any }) {
   const categorySlug = (await params).categorySlug;
-  // console.log("categoryId", categorySlug);
+  //  console.log("categoryId", categorySlug);
 
   const categoryRow = db
     .prepare(`SELECT * FROM category WHERE slug = ?`)

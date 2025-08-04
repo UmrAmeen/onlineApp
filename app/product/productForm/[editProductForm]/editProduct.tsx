@@ -1,5 +1,5 @@
 "use client";
-import { CreateProductForm } from "@/app/productFormaction";
+import { CreateProductForm, UpdateProductForm } from "@/app/productFormaction";
 import { useActionState, useState } from "react";
 import slugify from "slugify";
 
@@ -19,7 +19,7 @@ export default function EditProduct({ categoryRows, product }: any) {
   const handleSlugChange = (e: any) => {
     setSlug(e.target.value);
   };
-  const [state, formAction, isPending] = useActionState(CreateProductForm, {
+  const [state, formAction, isPending] = useActionState(UpdateProductForm, {
     success: false,
     error: "",
   });
@@ -67,9 +67,9 @@ export default function EditProduct({ categoryRows, product }: any) {
         </label>
         <label>
           category
-          <select name="category" defaultValue={product.category}>
+          <select name="categoryId" defaultValue={product.categoryId}>
             {categoryRows.map((row: RowType) => (
-              <option key={row.id} value={row.name}>
+              <option key={row.id} value={row.id}>
                 {row.name}
               </option>
             ))}

@@ -1,6 +1,4 @@
 export default function ProductCard({ row }: any) {
-
-
   return (
     <div className="myproduct">
       <img src={row.base64Image} />

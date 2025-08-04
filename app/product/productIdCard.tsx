@@ -7,7 +7,7 @@ export default function ProductIdCard({ row }: any) {
       <div className="product-image">
         <img src={row.base64Image} alt={row.name} />
       </div>
-      <div >
+      <div>
         <h3 className="product-name">{row.name}</h3>
         <p>{row.description}</p>
         <div className="product-actions">
@@ -15,11 +15,7 @@ export default function ProductIdCard({ row }: any) {
           <Link href="/signUpForm">
             <button className="add-to-cart-btn">Add to Cart</button>
           </Link>
-          <Link
-            href={{
-              pathname: "/product/productForm/editProductForm",
-            }}
-          >
+          <Link href={`/product/productForm/${row.slug}`}>
             <button className="add-to-cart-btn">Edit</button>
           </Link>
         </div>
