@@ -2,11 +2,19 @@ import db from "@/app/lib/sqlite/db";
 import ProductIdList from "../prodctIdList";
 
 export default async function ProductPage({ params }: { params: any }) {
-  const productSlug = (await params).productSlug;
-
+  const productSlug = await params.productSlug;
   const row = db
-    .prepare(`SELECT * FROM products WHERE slug = ? `)
+    .prepare(
+      `SELECT products.*, images.image 
+     FROM products 
+     JOIN images ON products.image_id = images.id 
+     WHERE products.slug = ?`
+    )
     .get(productSlug);
+
+  if (!row) {
+    return <p>No product found for slug: {productSlug}</p>;
+  }
 
   const base64Image = `data:image/jpeg;base64,${Buffer.from(row.image).toString("base64")}`;
   const { image, ...restProduct } = row;

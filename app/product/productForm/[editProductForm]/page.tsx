@@ -7,8 +7,11 @@ interface RowType {
 export default async function ProductForm({ params }: { params: any }) {
   const editProductForm = (await params).editProductForm;
 
-  const categoryRows = db.prepare("SELECT * FROM category ").all();
-
+  const categoryRows = db
+    .prepare(
+      `SELECT * FROM category join images on category.image_id =images.id `
+    )
+    .all();
   const categoryRowsWithBase64Images = categoryRows.map((row: RowType) => {
     const base64Image = row.image.toString("base64");
     const { image, ...rest } = row;
@@ -19,7 +22,9 @@ export default async function ProductForm({ params }: { params: any }) {
   });
 
   const product = db
-    .prepare("SELECT * FROM products WHERE slug = ?")
+    .prepare(
+      "SELECT * FROM products join images on products.image_id =images.id WHERE slug = ?"
+    )
     .get(editProductForm);
 
   if (!product) {
@@ -35,7 +40,7 @@ export default async function ProductForm({ params }: { params: any }) {
   };
   return (
     <>
-    <h1> edit {product.name}</h1>
+      <h1> edit {product.name}</h1>
       <EditProduct
         categoryRows={categoryRowsWithBase64Images}
         product={productWithImage}

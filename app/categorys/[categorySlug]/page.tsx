@@ -6,38 +6,43 @@ import ProductList from "@/app/product/productList";
 interface RowType {
   [key: string]: any;
 }
+
 export default async function CategoryId({ params }: { params: any }) {
   const categorySlug = (await params).categorySlug;
-  //  console.log("categoryId", categorySlug);
 
-  const categoryRow = db
-    .prepare(`SELECT * FROM category WHERE slug = ?`)
-    .get(categorySlug);
-  // console.log("categoryRow", categoryRow);
+  const categoryRows = db
+    .prepare(
+      `SELECT * FROM category join images on category.image_id = images.id WHERE slug = ?`
+    )
+    .all(categorySlug);
+  // console.log("categoryRow", categoryRows);
+  if (!categoryRows) {
+  notFound();
+}
 
-  if (!categoryRow) {
-    notFound();
-  }
-
+  const categoryRow = categoryRows[0];
   const subcategories = db
-    .prepare(`SELECT * FROM category WHERE parent_id = ?`)
+    .prepare(
+      `SELECT * FROM category join images on category.image_id = images.id WHERE parent_id = ?`
+    )
     .all(categoryRow.id.toString());
 
   const productRows = db
-    .prepare(`SELECT * FROM products WHERE categoryId = ?`)
+    .prepare(
+      `SELECT * FROM products join images on products.image_id = images.id WHERE categoryId = ?`
+    )
     .all(categoryRow.id.toString());
 
-  const subcategoriRowsWithBase64Images = subcategories.map((row: RowType) => {
+  const subcategoryRowsWithBase64Images = subcategories.map((row: RowType) => {
     const base64Image = row.image.toString("base64");
-
     return {
       ...row,
       base64Image: `data:image/jpeg;base64,${base64Image}`,
     };
   });
-  const productRowWithBase64Image = productRows.map((row: RowType) => {
-    const base64Image = row.image.toString("base64");
 
+  const productRowsWithBase64Images = productRows.map((row: RowType) => {
+    const base64Image = row.image.toString("base64");
     return {
       ...row,
       base64Image: `data:image/jpeg;base64,${base64Image}`,
@@ -48,17 +53,15 @@ export default async function CategoryId({ params }: { params: any }) {
     <>
       <div>
         <div>
-          <h1 style={{ fontSize: " xx-large", textAlign: "center" }}>
+          <h1 style={{ fontSize: "xx-large", textAlign: "center" }}>
             {categoryRow.name}
           </h1>
         </div>
         <div className="productsDiv">
-          {subcategories.length > 0 ? (
-            <CategoryList rows={subcategoriRowsWithBase64Images} />
+          {subcategoryRowsWithBase64Images.length > 0 ? (
+            <CategoryList rows={subcategoryRowsWithBase64Images} />
           ) : (
-            <div>
-              <ProductList rows={productRowWithBase64Image} />
-            </div>
+            <ProductList rows={productRowsWithBase64Images} />
           )}
         </div>
       </div>
