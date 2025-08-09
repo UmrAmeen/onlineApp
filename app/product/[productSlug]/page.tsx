@@ -2,7 +2,7 @@ import db from "@/app/lib/sqlite/db";
 import ProductIdList from "../prodctIdList";
 
 export default async function ProductPage({ params }: { params: any }) {
-  const productSlug = await params.productSlug;
+  const productSlug = (await params).productSlug;
   const row = db
     .prepare(
       `SELECT products.*, images.image 
