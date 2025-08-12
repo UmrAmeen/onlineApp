@@ -11,7 +11,7 @@ export default async function ProductPage({ params }: { params: any }) {
      WHERE products.slug = ?`
     )
     .get(productSlug);
-
+  // console.log("row", row)
   if (!row) {
     return <p>No product found for slug: {productSlug}</p>;
   }

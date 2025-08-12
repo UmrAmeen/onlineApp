@@ -23,19 +23,25 @@ export default async function ProductForm({ params }: { params: any }) {
 
   const product = db
     .prepare(
-      "SELECT * FROM products join images on products.image_id =images.id WHERE slug = ?"
+      `
+  SELECT products.*, images.image 
+  FROM products
+  JOIN images ON products.image_id = images.id
+  WHERE products.slug = ?
+`
     )
     .get(editProductForm);
 
   if (!product) {
-    return <p>No product </p>;
+    return <p>No product</p>;
   }
 
   const base64Image = `data:image/jpeg;base64,${Buffer.from(product.image).toString("base64")}`;
-  const { image, ...restProduct } = product;
+
+  const { image, ...productWithoutImage } = product;
 
   const productWithImage = {
-    ...restProduct,
+    ...productWithoutImage,
     base64Image,
   };
   return (

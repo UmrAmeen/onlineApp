@@ -4,16 +4,28 @@ import ProductList from "./productList";
 interface RowType {
   [key: string]: any;
 }
+
 export default function Products() {
   const rows = db
-    .prepare(`SELECT * FROM products join images on products.image_id `)
+    .prepare(
+      `
+      SELECT products.*, images.image
+      FROM products
+      JOIN images ON products.image_id = images.id
+    `
+    )
     .all();
+  
+  console.log("✅ Raw rows from DB:", rows);
+
   const rowsWithBase64Images = rows.map((row: RowType) => {
-    const base64Image = row.image.toString("base64");
+    const base64Image = row.image
+      ? `data:image/jpeg;base64,${Buffer.from(row.image).toString("base64")}`
+      : null;
 
     return {
       ...row,
-      base64Image: `data:image/jpeg;base64,${base64Image}`,
+      base64Image,
     };
   });
 

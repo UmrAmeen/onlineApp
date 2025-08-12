@@ -40,24 +40,33 @@ export async function UpdateProductForm(
   const id = Number(formData.get("id"));
   const name = formData.get("name");
   const image_id = formData.get("image") as File;
-  const categoryId = formData.get("categoryId");
-  const price = formData.get("price");
+  const categoryId = Number(formData.get("categoryId"));
+  const price = Number(formData.get("price"));
   const slug = formData.get("slug");
   const description = formData.get("description");
 
-  console.log("PRODUCT ID:", id);
-  console.log("PRODUCT NAME:", name);
-  console.log("PRODUCT IMAGE_ID:", image_id);
-  console.log("PRODUCT CATEGORYID:", categoryId);
-  console.log("PRODUCT PRICE:", price);
-  console.log("PRODUCT SLUG:", slug);
-  console.log("PRODUCT DESCRIPTION:", description);
+  const existingProduct = db
+    .prepare("SELECT * FROM products WHERE id = ?")
+    .get(id);
+  console.log(
+    "Query result:",
+    db.prepare("SELECT * FROM products WHERE id = ?").all(id)
+  );
+  if (!existingProduct) {
+    console.log("Product not found in database");
+    return {
+      success: false,
+      error: "Product not found in database",
+    };
+  }
 
   let buffer: Buffer | null = null;
 
-  if (image_id && image_id.size > 0) {
+  if (image_id && image_id.size > 0 && image_id.name !== "undefined") {
     const imageBytes = await image_id.arrayBuffer();
     buffer = Buffer.from(imageBytes);
+  } else {
+    buffer = existingProduct.image_id;
   }
 
   const updateProduct = db.prepare(
@@ -74,14 +83,16 @@ export async function UpdateProductForm(
     description,
     id
   );
+
   if (result.changes > 0) {
     return {
       success: true,
-      error: result.changes === 0 ? "No changes were made." : "",
+      message: "Product updated successfully",
+    };
+  } else {
+    return {
+      success: false,
+      error: "No changes were made",
     };
   }
-  return {
-    success: false,
-    error: "Product not found ",
-  };
 }
