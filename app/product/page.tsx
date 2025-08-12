@@ -15,8 +15,6 @@ export default function Products() {
     `
     )
     .all();
-  
-  console.log("✅ Raw rows from DB:", rows);
 
   const rowsWithBase64Images = rows.map((row: RowType) => {
     const base64Image = row.image

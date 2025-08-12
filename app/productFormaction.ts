@@ -48,10 +48,7 @@ export async function UpdateProductForm(
   const existingProduct = db
     .prepare("SELECT * FROM products WHERE id = ?")
     .get(id);
-  console.log(
-    "Query result:",
-    db.prepare("SELECT * FROM products WHERE id = ?").all(id)
-  );
+
   if (!existingProduct) {
     console.log("Product not found in database");
     return {
@@ -71,7 +68,7 @@ export async function UpdateProductForm(
 
   const updateProduct = db.prepare(
     `UPDATE products 
-     SET name = ?,  image_id = COALESCE(?, image_id) , categoryId = ?, price = ?, slug = ?, description = ?
+     SET name = ?,  image_id = ? , categoryId = ?, price = ?, slug = ?, description = ?
      WHERE id = ?`
   );
   const result = updateProduct.run(

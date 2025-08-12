@@ -16,7 +16,7 @@ export default async function CategoryId({ params }: { params: any }) {
     )
     .get(categorySlug);
     
-  console.log("categoryRow", categoryRow);
+  // console.log("categoryRow", categoryRow);
   if (!categoryRow) {
     notFound();
   }
@@ -26,7 +26,7 @@ export default async function CategoryId({ params }: { params: any }) {
       `SELECT * FROM category JOIN images ON category.image_id = images.id WHERE parent_id = ?`
     )
     .all(categoryRow.id.toString());
-  console.log("subcategorys", subcategories);
+  // console.log("subcategorys", subcategories);
 
   const productRows = db
     .prepare(
@@ -34,7 +34,7 @@ export default async function CategoryId({ params }: { params: any }) {
     )
     .all(categoryRow.id.toString());
 
-  console.log("✅ productRows", productRows);
+  // console.log("✅ productRows", productRows);
 
   const subcategoryRowsWithBase64Images = subcategories.map((row: RowType) => {
     const base64Image = row.image
