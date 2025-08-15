@@ -7,7 +7,7 @@ export default async function ProductPage({ params }: { params: any }) {
     .prepare(
       `SELECT products.*, images.image 
      FROM products 
-     JOIN images ON products.image_id = images.id 
+     LEFT JOIN images ON products.image_id = images.id 
      WHERE products.slug = ?`
     )
     .get(productSlug);

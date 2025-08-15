@@ -12,10 +12,13 @@ export default async function CategoryId({ params }: { params: any }) {
 
   const categoryRow = db
     .prepare(
-      `SELECT * FROM category JOIN images ON category.image_id = images.id WHERE slug = ?`
+      `SELECT category.*, images.image 
+     FROM category 
+     LEFT JOIN images ON category.image_id = images.id 
+     WHERE category.slug = ?`
     )
     .get(categorySlug);
-    
+
   // console.log("categoryRow", categoryRow);
   if (!categoryRow) {
     notFound();
@@ -23,14 +26,21 @@ export default async function CategoryId({ params }: { params: any }) {
 
   const subcategories = db
     .prepare(
-      `SELECT * FROM category JOIN images ON category.image_id = images.id WHERE parent_id = ?`
+      `SELECT category.*, images.*
+     FROM category
+     LEFT JOIN images ON category.image_id = images.id
+     WHERE category.parent_id = ?`
     )
     .all(categoryRow.id.toString());
+
   // console.log("subcategorys", subcategories);
 
   const productRows = db
     .prepare(
-      `SELECT * FROM products JOIN images ON products.image_id = images.id WHERE categoryId = ?`
+      `SELECT products.*, image AS image
+     FROM products
+     LEFT JOIN images ON products.image_id = images.id
+     WHERE products.categoryId = ?`
     )
     .all(categoryRow.id.toString());
 
