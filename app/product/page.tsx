@@ -8,9 +8,7 @@ interface RowType {
 export default function Products() {
   const rows = db
     .prepare(
-      `SELECT products.*, images.image
-      FROM products
-      JOIN images ON products.image_id = images.id `
+      `SELECT products.*, images.image FROM products LEFT JOIN images ON products.image_id = images.id `
     )
     .all();
 

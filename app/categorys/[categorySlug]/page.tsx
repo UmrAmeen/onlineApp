@@ -44,8 +44,6 @@ export default async function CategoryId({ params }: { params: any }) {
     )
     .all(categoryRow.id.toString());
 
-  // console.log("✅ productRows", productRows);
-
   const subcategoryRowsWithBase64Images = subcategories.map((row: RowType) => {
     const base64Image = row.image
       ? Buffer.from(row.image).toString("base64")
