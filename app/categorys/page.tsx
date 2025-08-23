@@ -7,9 +7,13 @@ interface RowType {
 export default function Categorys() {
   const rows = db
     .prepare(
-      `SELECT * FROM category join images on category.image_id =images.id WHERE parent_id IS NULL `
+      `SELECT * 
+     FROM category 
+     LEFT JOIN images ON category.image_id = images.id 
+     WHERE category.parent_id IS NULL`
     )
     .all();
+
   const rowsWithBase64Images = rows.map((row: RowType) => {
     const base64Image = row.image.toString("base64");
 

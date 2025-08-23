@@ -4,7 +4,7 @@ import EditProduct from "./editProduct";
 interface RowType {
   [key: string]: any;
 }
-export default async function ProductForm({ params }: { params: any }) {
+export default async function EditProductForm({ params }: { params: any }) {
   const editProductForm = (await params).editProductForm;
 
   const categoryRows = db

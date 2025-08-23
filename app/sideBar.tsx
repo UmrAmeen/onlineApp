@@ -13,6 +13,9 @@ export default function SideBar() {
         <Link href="/product/productForm/newProductForm">
           <li className="sidebar-li"> New product Form</li>
         </Link>
+        <Link href="/categorys/categoryForm">
+          <li className="sidebar-li">New Category Form</li>
+        </Link>
         <Link href="/signUpForm">
           <li className="sidebar-li">signUp</li>
         </Link>

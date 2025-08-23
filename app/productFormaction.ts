@@ -1,6 +1,18 @@
 "use server";
 import db from "./lib/sqlite/db";
 
+export async function insertImage(image: File): Promise<number> {
+  const imageBuffer = Buffer.from(await image.arrayBuffer());
+  const imageType = image.type;
+
+  const stmt = db.prepare(
+    "INSERT INTO images (image, imageType) VALUES (?, ?)"
+  );
+  const result = stmt.run(imageBuffer, imageType);
+
+  return result.lastInsertRowid;
+}
+
 export async function CreateProductForm(
   prevFormState: any,
   formData: FormData
@@ -12,10 +24,7 @@ export async function CreateProductForm(
   const slug = formData.get("slug");
   const description = formData.get("description");
 
-  const imageBuffer = Buffer.from(await image.arrayBuffer());
-  const insertImage = db.prepare("INSERT INTO images (image) VALUES (?)");
-  const imageResult = insertImage.run(imageBuffer);
-  const imageId = imageResult.lastInsertRowid;
+  const imageId = await insertImage(image);
 
   const insert = db.prepare(
     "INSERT INTO products(name,image_id,categoryId,price,slug,description) VALUES(?,?,?,?,?,?)"
@@ -62,19 +71,24 @@ export async function UpdateProductForm(
     return { success: false, error: "Product not found in database" };
   }
 
-  const imageBuffer = Buffer.from(await image.arrayBuffer());
-  const imageType = image.type;
-  const insertImage = db.prepare(
-    "INSERT INTO images (image, imageType) VALUES (?, ?)"
-  );
-  const imageResult = insertImage.run(imageBuffer, imageType);
-  const imageId = imageResult.lastInsertRowid;
+  let imageId = existingProduct.image_id;
+
+  if (image && image.size > 0) {
+    imageId = await insertImage(image);
+
+    if (existingProduct.image_id) {
+      db.prepare("DELETE FROM images WHERE id = ?").run(
+        existingProduct.image_id
+      );
+    }
+  }
 
   const update = db.prepare(`
     UPDATE products 
     SET name = ?, image_id = ?, categoryId = ?, price = ?, slug = ?, description = ?
     WHERE id = ?
   `);
+
   const result = update.run(
     name,
     imageId,
