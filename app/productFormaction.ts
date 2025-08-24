@@ -5,10 +5,10 @@ export async function insertImage(image: File): Promise<number> {
   const imageBuffer = Buffer.from(await image.arrayBuffer());
   const imageType = image.type;
 
-  const stmt = db.prepare(
+  const imageInsert = db.prepare(
     "INSERT INTO images (image, imageType) VALUES (?, ?)"
   );
-  const result = stmt.run(imageBuffer, imageType);
+  const result = imageInsert.run(imageBuffer, imageType);
 
   return result.lastInsertRowid;
 }

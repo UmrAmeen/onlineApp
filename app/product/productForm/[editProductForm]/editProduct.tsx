@@ -1,5 +1,5 @@
 "use client";
-import {  UpdateProductForm } from "@/app/productFormaction";
+import { UpdateProductForm } from "@/app/productFormaction";
 import { useActionState, useState } from "react";
 import slugify from "slugify";
 
@@ -8,6 +8,7 @@ interface RowType {
 }
 
 export default function EditProduct({ categoryRows, product }: any) {
+  const [file, setFile] = useState<string | null>(null);
   const [name, setName] = useState(product.name);
   const [slug, setSlug] = useState(product.slug);
   const [editSlug, setEditSlug] = useState(false);
@@ -16,6 +17,10 @@ export default function EditProduct({ categoryRows, product }: any) {
     setName(e.target.value);
     setSlug(slugify(e.target.value.trim(), "_"));
   };
+  function handleChange(e: any) {
+    console.log(e.target.files);
+    setFile(URL.createObjectURL(e.target.files[0]));
+  }
   const handleSlugChange = (e: any) => {
     setSlug(e.target.value);
   };
@@ -60,9 +65,18 @@ export default function EditProduct({ categoryRows, product }: any) {
 
         <label className="img-label">
           image:
-          <input type="file" name="image" accept="image/*" />
-           {product.base64Image && (
-            <img src={product.base64Image} alt="Image" style={{ width: 120 }} />
+          <input
+            type="file"
+            name="image"
+            accept="image/*"
+            onChange={handleChange}
+          />
+          {(file || product.base64Image) && (
+            <img
+              src={file || product.base64Image}
+              alt="Image"
+              style={{ width: 120 }}
+            />
           )}
         </label>
         <label>

@@ -31,8 +31,7 @@ export default function NewCategory({ categoryRows }: any) {
   return (
     <>
       {state.success ? <div>Success</div> : <div>{state.error}</div>}
-    <form className="myFormPage" action={formAction} encType="multipart/form-data">
-
+      <form className="myFormPage" action={formAction}>
         <label>
           name:
           <input
@@ -76,6 +75,7 @@ export default function NewCategory({ categoryRows }: any) {
         <label>
           category
           <select name="parentId">
+            <option value="">No Parent</option>
             {categoryRows?.map((row: RowType) => (
               <option key={row.id} value={row.id}>
                 {row.name}

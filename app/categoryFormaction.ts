@@ -6,7 +6,7 @@ export async function CreateCategoryForm(
   formData: FormData
 ) {
   const name = formData.get("name");
-  const parentId = formData.get("parentId");
+  const parentIdRaw = formData.get("parentId");
   const image = formData.get("image") as File;
   const slug = formData.get("slug");
 
@@ -17,6 +17,7 @@ export async function CreateCategoryForm(
   );
   const imageResult = insertImage.run(imageBuffer, imageType);
   const imageId = imageResult.lastInsertRowid;
+  const parentId = parentIdRaw === "" ? null : parentIdRaw;
 
   const insert = db.prepare(
     "INSERT INTO category(name, parent_id,image_id,slug) VALUES(?,?,?,?)"
