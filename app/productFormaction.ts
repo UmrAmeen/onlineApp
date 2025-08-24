@@ -1,4 +1,5 @@
 "use server";
+import { redirect } from "next/navigation";
 import db from "./lib/sqlite/db";
 
 export async function insertImage(image: File): Promise<number> {
@@ -98,6 +99,8 @@ export async function UpdateProductForm(
     description,
     id
   );
+ console.log("result",result)
+  // redirect(`/product/${slug}`)
 
   return result.changes > 0
     ? { success: true, message: "Product updated successfully" }
