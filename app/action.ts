@@ -23,3 +23,14 @@ export async function CreateSignUpForm(prevFormState: any, formData: FormData) {
     error: "Something went wrong!",
   };
 }
+export async function insertImage(image: File): Promise<number> {
+  const imageBuffer = Buffer.from(await image.arrayBuffer());
+  const imageType = image.type;
+
+  const imageInsert = db.prepare(
+    "INSERT INTO images (image, imageType) VALUES (?, ?)"
+  );
+  const result = imageInsert.run(imageBuffer, imageType);
+
+  return result.lastInsertRowid;
+}

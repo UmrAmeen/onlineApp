@@ -1,4 +1,5 @@
 "use server";
+import { insertImage } from "./action";
 import db from "./lib/sqlite/db";
 
 export async function CreateCategoryForm(
@@ -10,13 +11,7 @@ export async function CreateCategoryForm(
   const image = formData.get("image") as File;
   const slug = formData.get("slug");
 
-  const imageBuffer = Buffer.from(await image.arrayBuffer());
-  const imageType = image.type;
-  const insertImage = db.prepare(
-    "INSERT INTO images (image, imageType) VALUES (?, ?)"
-  );
-  const imageResult = insertImage.run(imageBuffer, imageType);
-  const imageId = imageResult.lastInsertRowid;
+  const imageId = await insertImage(image);
   const parentId = parentIdRaw === "" ? null : parentIdRaw;
 
   const insert = db.prepare(

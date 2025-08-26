@@ -1,18 +1,9 @@
 "use server";
 import { redirect } from "next/navigation";
 import db from "./lib/sqlite/db";
+import { insertImage } from "./action";
+import { revalidatePath } from "next/cache";
 
-export async function insertImage(image: File): Promise<number> {
-  const imageBuffer = Buffer.from(await image.arrayBuffer());
-  const imageType = image.type;
-
-  const imageInsert = db.prepare(
-    "INSERT INTO images (image, imageType) VALUES (?, ?)"
-  );
-  const result = imageInsert.run(imageBuffer, imageType);
-
-  return result.lastInsertRowid;
-}
 
 export async function CreateProductForm(
   prevFormState: any,
@@ -102,6 +93,6 @@ export async function UpdateProductForm(
   console.log("result", result);
 
   return result.changes > 0
-    ? redirect(`/product/${slug}`)
+    ? (revalidatePath(`/product/${slug}`), redirect(`/product/${slug}`))
     : { success: false, error: "No changes were made" };
 }
