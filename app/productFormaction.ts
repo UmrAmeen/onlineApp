@@ -99,10 +99,9 @@ export async function UpdateProductForm(
     description,
     id
   );
- console.log("result",result)
-  // redirect(`/product/${slug}`)
+  console.log("result", result);
 
   return result.changes > 0
-    ? { success: true, message: "Product updated successfully" }
+    ? redirect(`/product/${slug}`)
     : { success: false, error: "No changes were made" };
 }

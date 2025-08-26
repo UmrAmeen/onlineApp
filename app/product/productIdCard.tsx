@@ -15,7 +15,7 @@ export default function ProductIdCard({ row }: any) {
           <Link href="/signUpForm">
             <button className="add-to-cart-btn">Add to Cart</button>
           </Link>
-          <Link href={`/product/productForm/${row.slug}`}>
+          <Link href={`/product/${row.slug}/editproduct`}>
             <button className="add-to-cart-btn">Edit</button>
           </Link>
         </div>

@@ -5,7 +5,7 @@ interface RowType {
   [key: string]: any;
 }
 export default async function EditProductForm({ params }: { params: any }) {
-  const editProductForm = (await params).editProductForm;
+  const editProductForm = (await params).productSlug;
 
   const categoryRows = db
     .prepare(
