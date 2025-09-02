@@ -4,19 +4,18 @@ import db from "./lib/sqlite/db";
 import { insertImage } from "./action";
 import { revalidatePath } from "next/cache";
 
-
 export async function CreateProductForm(
   prevFormState: any,
   formData: FormData
 ) {
   const name = formData.get("name");
   const image = formData.get("image") as File;
-  const categoryId = formData.get("category");
+  const categoryId = formData.get("categoryId");
   const price = formData.get("price");
   const slug = formData.get("slug");
   const description = formData.get("description");
-
-  const imageId = await insertImage(image);
+  const selectedImageId = formData.get("selectedImageId");
+  const imageId = selectedImageId || (await insertImage(image));
 
   const insert = db.prepare(
     "INSERT INTO products(name,image_id,categoryId,price,slug,description) VALUES(?,?,?,?,?,?)"
@@ -77,7 +76,7 @@ export async function UpdateProductForm(
 
   const update = db.prepare(`
     UPDATE products 
-    SET name = ?, image_id = ?, categoryId = ?, price = ?, slug = ?, description = ?
+    SET name = ?, image_id = ?, categoryId = ?, price = ?, slug = ?, description = ?, 
     WHERE id = ?
   `);
 

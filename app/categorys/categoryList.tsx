@@ -4,7 +4,7 @@ import CategoryCard from "./categoryCard";
 interface RowType {
   [key: string]: any;
 }
-export default function CategoryList({ rows }: any) {
+export default function CategoryList({ rows }: { rows: RowType[] }) {
   return (
     <>
       <div className="productsDiv">
@@ -12,6 +12,7 @@ export default function CategoryList({ rows }: any) {
           <Link key={row.id} href={`/categorys/${row.slug}`}>
             <div>
               <CategoryCard row={row} />
+              
             </div>
           </Link>
         ))}

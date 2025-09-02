@@ -19,7 +19,7 @@ export default async function CategoryId({ params }: { params: any }) {
     )
     .get(categorySlug);
 
-  // console.log("categoryRow", categoryRow);
+  
   if (!categoryRow) {
     notFound();
   }
@@ -33,7 +33,6 @@ export default async function CategoryId({ params }: { params: any }) {
     )
     .all(categoryRow.id.toString());
 
-  // console.log("subcategorys", subcategories);
 
   const productRows = db
     .prepare(

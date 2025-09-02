@@ -1,0 +1,100 @@
+"use client";
+import { UpdateCategoryForm } from "@/app/categoryFormaction";
+import { useActionState, useState } from "react";
+import slugify from "slugify";
+
+interface RowType {
+  [key: string]: any;
+}
+
+export default function EditCategory({  category ,categories}: any) {
+  const [file, setFile] = useState<string | null>(null);
+  const [name, setName] = useState(category.name);
+  const [slug, setSlug] = useState(category.slug);
+  const [editSlug, setEditSlug] = useState(false);
+
+  const handleNameChange = (e: any) => {
+    setName(e.target.value);
+    setSlug(slugify(e.target.value.trim(), "_"));
+  };
+  function handleChange(e: any) {
+    console.log(e.target.files);
+    setFile(URL.createObjectURL(e.target.files[0]));
+  }
+  const handleSlugChange = (e: any) => {
+    setSlug(e.target.value);
+  };
+  const [state, formAction, isPending] = useActionState(UpdateCategoryForm, {
+    success: false,
+    error: "",
+  });
+
+  return (
+    <div>
+      {state.success ? <div>Success</div> : <div>{state.error}</div>}
+      <form className="myFormPage" action={formAction}>
+        <input type="hidden" name="id" value={category.id} />
+        <label>
+          name:
+          <input
+            name="name"
+            placeholder="productName"
+            value={name}
+            onChange={handleNameChange}
+          />
+        </label>
+        <label className="slug-label">
+          <span className="slug-text">slug:</span>
+          <div className="input-button-container">
+            <input
+              name="slug"
+              placeholder="slug"
+              value={slug}
+              onChange={handleSlugChange}
+              readOnly={!editSlug}
+            />
+            <button
+              className="slug-button"
+              type="button"
+              onClick={() => setEditSlug(!editSlug)}
+            >
+              {editSlug ? "Save" : "Edit"}
+            </button>
+          </div>
+        </label>
+
+        <label className="img-label">
+          image:
+          <input
+            type="file"
+            name="image"
+            accept="image/*"
+            onChange={handleChange}
+          />
+          {(file || category.base64Image) && (
+            <img
+              src={file || category.base64Image}
+              alt="Image"
+              style={{ width: 120 }}
+            />
+          )}
+        </label>
+        <label>
+          category
+          <select name="parentId" defaultValue={category.parent_id}>
+            <option value="">No Parent</option>
+            {categories.map((row: RowType) => (
+              <option key={row.id} value={row.id}>
+                {row.name}
+              </option>
+            ))}
+          </select>
+        </label>
+
+        <button type="submit" className="submitButton" disabled={isPending}>
+          {isPending ? "Submitting..." : "Submit"}
+        </button>
+      </form>
+    </div>
+  );
+}
