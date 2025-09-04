@@ -8,9 +8,11 @@ import {
   DialogTitle,
 } from "@headlessui/react";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
-
+interface RowType {
+  [key: string]: any;
+}
 export default function Example({ Images }: any) {
-  const [file, setFile] = useState<string | null>(null); 
+  const [file, setFile] = useState<string | null>(null);
   const [selectedImageId, setSelectedImageId] = useState<string | null>(null);
   const [selectedImageUrl, setSelectedImageUrl] = useState<string | null>(null);
   const [open, setOpen] = useState(false);
@@ -151,9 +153,15 @@ export default function Example({ Images }: any) {
                     <button
                       type="button"
                       className="bg-green-500 hover:bg-green-600 px-4 py-2 rounded text-white w-full"
-                      onClick={() =>
-                        document.getElementById("fileInput")?.click()
-                      }
+                      onClick={() => {
+                        const input = document.getElementById(
+                          "fileInput"
+                        ) as HTMLInputElement;
+                        if (input) {
+                          input.value = "";
+                          input.click();
+                        }
+                      }}
                     >
                       Upload from Device
                     </button>
@@ -173,7 +181,7 @@ export default function Example({ Images }: any) {
                   <div>
                     <p className="mb-2 font-semibold">Select an Image:</p>
                     <div className="grid grid-cols-3 gap-4">
-                      {Images?.map((img) => (
+                      {Images?.map((img: RowType) => (
                         <label
                           key={img.id}
                           className="flex flex-col items-center cursor-pointer"

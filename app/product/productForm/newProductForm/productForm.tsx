@@ -2,7 +2,8 @@
 import { useActionState, useState, useEffect } from "react";
 import slugify from "slugify";
 import { CreateProductForm } from "@/app/productFormaction";
-import TailwindCss from "./tailWindmodalPopup/page";
+import Example from "./example";
+
 
 interface RowType {
   [key: string]: any;
@@ -58,7 +59,7 @@ export default function NewProduct({ categoryRows, Images }: any) {
           </div>
         </label>
         <label>
-          <TailwindCss Images={Images} />
+          <Example Images={Images} />
         </label>
 
         <label>

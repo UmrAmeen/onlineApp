@@ -15,8 +15,20 @@ export async function CreateProductForm(
   const slug = formData.get("slug");
   const description = formData.get("description");
   const selectedImageId = formData.get("selectedImageId");
-  const imageId = selectedImageId || (await insertImage(image));
 
+
+  let imageId: number | null = null;
+
+  if (selectedImageId) {
+    imageId = Number(selectedImageId);
+  } else if (image && image.size > 0) {
+    imageId = await insertImage(image);
+  } else {
+    return {
+      success: false,
+      error: "Please add an image.",
+    };
+  }
   const insert = db.prepare(
     "INSERT INTO products(name,image_id,categoryId,price,slug,description) VALUES(?,?,?,?,?,?)"
   );

@@ -1,6 +1,5 @@
 import db from "@/app/lib/sqlite/db";
 import NewProduct from "./productForm";
-import TailwindCss from "./tailWindmodalPopup/page";
 
 interface RowType {
   [key: string]: any;
@@ -20,7 +19,6 @@ export default function NewProductForm() {
   });
   return (
     <>
-      <TailwindCss />
       <h1>Create Product</h1>
       <NewProduct categoryRows={categoryRows} Images={images} />
     </>
