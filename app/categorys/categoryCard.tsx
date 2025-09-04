@@ -5,6 +5,7 @@ export default function CategoryCard({ row }: any) {
     <div className="myproduct">
       <img src={row.base64Image} />
       <p>{row.name}</p>
+      <div></div>
       <Link href={`/categorys/${row.slug}/edit`}>
         <button className="add-to-cart-btn">edit</button>
       </Link>

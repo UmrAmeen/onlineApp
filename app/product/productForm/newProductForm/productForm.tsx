@@ -5,7 +5,6 @@ import { CreateProductForm } from "@/app/productFormaction";
 
 import ImageUploadModal from "./imageUplode";
 
-
 interface RowType {
   [key: string]: any;
 }
