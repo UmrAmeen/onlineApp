@@ -11,7 +11,7 @@ import { ExclamationTriangleIcon } from "@heroicons/react/24/outline";
 interface RowType {
   [key: string]: any;
 }
-export default function Example({ Images }: any) {
+export default function ImageUploadModal({ Images }: any) {
   const [file, setFile] = useState<string | null>(null);
   const [selectedImageId, setSelectedImageId] = useState<string | null>(null);
   const [selectedImageUrl, setSelectedImageUrl] = useState<string | null>(null);

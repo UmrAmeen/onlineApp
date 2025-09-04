@@ -2,7 +2,8 @@
 import { useActionState, useState, useEffect } from "react";
 import slugify from "slugify";
 import { CreateProductForm } from "@/app/productFormaction";
-import Example from "./example";
+
+import ImageUploadModal from "./imageUplode";
 
 
 interface RowType {
@@ -59,7 +60,7 @@ export default function NewProduct({ categoryRows, Images }: any) {
           </div>
         </label>
         <label>
-          <Example Images={Images} />
+          <ImageUploadModal Images={Images} />
         </label>
 
         <label>
