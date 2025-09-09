@@ -1,9 +1,9 @@
 "use client";
-import { useActionState, useState, useEffect } from "react";
+import { useActionState, useState } from "react";
 import slugify from "slugify";
 import { CreateProductForm } from "@/app/productFormaction";
 
-import ImageUploadModal from "./imageUplode";
+import ImageSelector from "./tabimageuplode";
 
 interface RowType {
   [key: string]: any;
@@ -59,7 +59,8 @@ export default function NewProduct({ categoryRows, Images }: any) {
           </div>
         </label>
         <label>
-          <ImageUploadModal Images={Images} />
+          {/* <ImageUploadModal Images={Images} /> */}
+          <ImageSelector Images={Images} />
         </label>
 
         <label>

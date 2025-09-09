@@ -16,7 +16,6 @@ export async function CreateProductForm(
   const description = formData.get("description");
   const selectedImageId = formData.get("selectedImageId");
 
-
   let imageId: number | null = null;
 
   if (selectedImageId) {
@@ -32,6 +31,7 @@ export async function CreateProductForm(
   const insert = db.prepare(
     "INSERT INTO products(name,image_id,categoryId,price,slug,description) VALUES(?,?,?,?,?,?)"
   );
+  
 
   const result = insert.run(
     name,
