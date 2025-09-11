@@ -2,7 +2,7 @@
 import { useActionState, useState } from "react";
 import slugify from "slugify";
 import { CreateProductForm } from "@/app/productFormaction";
-import ImageSelector from "./tabimageuplode";
+import ImageSelector from "./tabImageuplode";
 
 
 interface RowType {
